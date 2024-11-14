@@ -1,0 +1,13 @@
+plugins:
+  - "@semantic-release/commit-analyzer"
+  - "@semantic-release/release-notes-generator"
+  - "@semantic-release/changelog"
+  - "@semantic-release/github"
+
+branches:
+  - "+([0-9])?(.{+([0-9]),x}).x"
+  - main
+  - name: alpha/*
+    prerelease: '${name.replace(/^alpha\//g, "alpha-")}'
+  - name: beta/*
+    prerelease: '${name.replace(/^beta\//g, "beta-")}'

@@ -1,0 +1,69 @@
+---
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - dev
+      - 'feat/**'
+      - '!feat/**-poc'
+
+jobs:
+  build-test:
+    name: Build, Test, and Report
+    runs-on: ubuntu-latest
+    if: "! contains(github.event.head_commit.message, '[skip ci]')"
+    steps:
+      # Step 1: Check out the code from the repository
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      # Step 2: Set up Python environment
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      # Step 3: Install Python dependencies (app, dev, and testing dependencies)
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r app/requirements.txt # app dependencies
+          pip install pytest pytest-cov flake8 black coverage  # dev/testing dependencies
+
+      # Step 4: Run code formatting check with Black
+      - name: Check code formatting with Black
+        run: |
+          black --diff .
+
+      # Step 4: Run code formatting check with Black
+      - name: Formatting with Black
+        run: |
+          black .
+
+      # Step 5: Run code linting with Flake8
+      - name: Lint code with Flake8
+        run: |
+          flake8 . -v
+
+      # Step 6: Run unit tests and generate a coverage report
+      - name: Run tests with Pytest and generate coverage report
+        run: |
+          pytest --cov=. --cov-report=xml --cov-report=term
+
+      # Step 7: Upload coverage report as an artifact
+      - name: Upload results to Codecov
+        uses: codecov/codecov-action@v4
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          name: codecov-umbrella
+          files: ./coverage.xml
+          flags: unittests
+          verbose: true
+          fail_ci_if_error: true
+
+      # Step 8: Run SonarCloud analysis
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v3.1.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
