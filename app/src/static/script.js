@@ -106,19 +106,21 @@ $(document).ready(function() {
         'submit',
         function(event) {
         event.preventDefault();
-        var form_data = $('#data-form').serializeArray();
-        var formInputIsValid = [];
-        console.log(form_data);
+        var form_data = $('#data-form').serializeArray(); // Receive form data
+        // Report input data to browser console
+        console.log("Form input data:")
+        console.log(form_data); 
+
+        var formInputIsValid = {}; // To store field validation result
         for (var input in form_data){
             var element=$("#input-"+form_data[input]['name']);
             var select_element=$("#select-"+form_data[input]['name']);
+
             if (element.hasClass("input-valid") || select_element.hasClass("input-valid")) {
-                formInputIsValid.push(true);
-                console.log("Element Valid: "+form_data[input]['name'])
+                formInputIsValid[form_data[input]["name"]] = true;
             }
             else {
-                formInputIsValid.push(false);
-                console.log("Element Invalid: "+form_data[input]['name'])
+                formInputIsValid[form_data][input]["name"] = false;
             }
         };
 
@@ -131,8 +133,12 @@ $(document).ready(function() {
         const weightLossRate = $('#input-rate').val();
         const energyDeficit = $('#input-energy').val();
 
+        console.log("Form input data validation object:")
         console.log(formInputIsValid)
-        const formIsValid = formInputIsValid.every(value => value === true);
+
+        // Check if form input data values are valid 
+        const formIsValid = Object.values(formInputIsValid).every(value => value === true);
+        console.log("Is form input data valid?")
         console.log(formIsValid)
 
         if (formIsValid) {
@@ -151,7 +157,7 @@ $(document).ready(function() {
                     energy_deficit: energyDeficit
                 }),
                 success: function(response) {
-                    console.log("Server response");
+                    console.log("Server response:");
                     console.log(response);
                     serverMessage = `${response.message}: ${response.status}`;
                     displayMessage(statusMessageContainer, serverMessage);
@@ -170,7 +176,7 @@ $(document).ready(function() {
         function(event) {
         event.preventDefault();
         $.ajax({
-            url: '/reset',
+            url: '/clear',
             type: 'POST',
             contentType: 'application/json',
             success: function(response) {
