@@ -1,0 +1,8 @@
+numpy
+Flask
+pytest
+pytest-cov
+flake8
+black
+coverage
+flasgger

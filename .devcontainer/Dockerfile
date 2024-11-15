@@ -12,8 +12,5 @@ WORKDIR /workspaces
 RUN pip install --upgrade pip
 
 # Install additional Python dependencies if needed
-COPY requirements.txt .
+COPY .devcontainer/requirements.txt .
 RUN pip install -r requirements.txt
-
-# Expose development ports (e.g., 5000 for Flask)
-# EXPOSE 5000
