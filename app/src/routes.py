@@ -9,80 +9,60 @@ number: TypeAlias = int | float
 
 
 # To hold the data for the table on buffer
-data_input = []
-data_output = []
+response_data = []
 
 
-def process_data_in(data: JSONType) -> dict[str, str | number]:
-    processed_data_in = {}
+def process_form_data(data: JSONType) -> dict[str, str | number]:
+    processed_data = {}
     for key, value in data.items():
         try:
+            # Convert input number string
             value = float(value)  # type: ignore
         except Exception:
-            pass
-        processed_data_in.update({key: value})
-    return processed_data_in
+            pass # Forget if string value is not number
+        processed_data.update({key: value})
+    return processed_data
 
 
 @app.route("/")
 def home() -> str:
     """
-    Main function to handle and render the homepage.
+    Route to handle and render the homepage
     """
     return render_template("index.html")
 
 
-@app.route("/data-input", methods=["GET"])
-def get_data_in() -> Response:
-    return jsonify(data_input)
-
-
-@app.route("/data-output", methods=["GET"])
-def get_data_out() -> Response:
-    return jsonify(data_output)
-
-
-@app.route("/model", methods=["POST"])
-def model_construct() -> Response:
+@app.route("/submit", methods=["POST"])
+def submit() -> Response:
     """
-    Main function to handle AJAX POST requests with input data.
+    Route to handle form data
 
-    :return: Data received and data output
+    :return: Input and output data
     :rtype: JSON
     """
-    # Get data from AJAX request
-    data_in = request.json
+    form_data = request.json # Get data from POST request
     try:
-        data_in = process_data_in(data=data_in)  # type: ignore
-    except Exception:
-        response = {
-            "message": "Data Input Conversion",
-            "status": "Failed!",
-            "data_out": [],
-        }
-
-    try:
-        # Calculate output from model
-        model_engine = model.Builder(data=data_in)  # type: ignore
-        model_engine.build()
-        model_engine.calculate()
-        data_output = model_engine.jasonable_dict()
+        processed_data = process_form_data(data=form_data)  # type: ignore
+                # Calculate output from model
+        modeller = model.Builder(data=processed_data)  # type: ignore
+        modeller.build()
+        modeller.calculate()
+        response_data = modeller.jasonable_dict()
         response = {
             "message": "Model Run",
             "status": "Success!",
-            "data_out": data_output,
+            "data": response_data,
         }
     except Exception:
         response = {
             "message": "Model Run",
             "status": "Failed!",
-            "data_out": [],
+            "data": [],
         }
-
     return jsonify(response)
 
 
-@app.route("/reset", methods=["POST"])
+@app.route("/clear", methods=["POST"])
 def clear() -> Response:
     """
     Main function to handle AJAX POST requests to clear form fields and plots.
@@ -91,11 +71,10 @@ def clear() -> Response:
     :rtype: JSON
     """
     # Get data from AJAX request
-    data_input.clear()
-    data_output.clear()
+    response_data.clear()
     response = {
         "message": "Data Clearing",
         "status": "Success!",
-        "data_out": data_output,
+        "data_out": response_data,
     }
     return jsonify(response)

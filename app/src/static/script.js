@@ -137,7 +137,7 @@ $(document).ready(function() {
 
         if (formIsValid) {
             $.ajax({
-                url: '/model',
+                url: '/submit',
                 type: 'POST',
                 contentType: 'application/json',
                 data: JSON.stringify({
