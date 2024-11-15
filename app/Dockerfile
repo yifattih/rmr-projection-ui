@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ /app/src/
 
 # Create port environment variable
-ENV PORT 5000
+ENV FLASK_RUN_PORT=5000
 
 # Expose the application port
 EXPOSE 5000
