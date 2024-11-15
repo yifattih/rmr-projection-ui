@@ -112,6 +112,7 @@ $(document).ready(function() {
         console.log(form_data); 
 
         var formInputIsValid = {}; // To store field validation result
+        // Trigger form input field validation check
         for (var input in form_data){
             var element=$("#input-"+form_data[input]['name']);
             var select_element=$("#select-"+form_data[input]['name']);
@@ -197,6 +198,8 @@ $(document).ready(function() {
 });
 
 //////// Utility functions ////////
+
+// Input fields validatio function
 function isGreaterThan (
     field,
     minValue,
@@ -268,6 +271,7 @@ function isBetween (
     });
 };
 
+// Function to deisplay confirmation/error messages
 function displayMessage (messageContainer, message) {
     messageContainer.val('');
     messageContainer.text(message);
