@@ -12,5 +12,5 @@ WORKDIR /workspaces
 RUN pip install --upgrade pip
 
 # Install additional Python dependencies if needed
-COPY .devcontainer/requirements.txt .
+COPY requirements.txt .
 RUN pip install -r requirements.txt
