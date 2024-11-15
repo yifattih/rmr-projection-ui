@@ -81,7 +81,7 @@ $(document).ready(function() {
         statusMessageContainer
     );
 
-    //////// Change units based on selection ////////
+    //////// Change units display based on selection ////////
 
     $('#select-units').on(
         'change',
@@ -282,22 +282,3 @@ function displayMessage (messageContainer, message) {
         400
     );
 };
-
-// function loadDataIn() {
-//     $.ajax({
-//         url: '/data-in',
-//         type: 'GET',
-//         success: function(data_in) {
-//             data_in.forEach(item => {
-//                 $('#dataTable tbody').append(`<tr><td>${item.weight}</td><td>${item.height}</td><td>${item.age}</td><td>${item.time}</td></tr>`);
-//             });
-//         }
-//     });
-// }
-
-// function loadDataOut() {
-//     $.ajax({
-//         url: '/data-out',
-//         type: 'GET'
-//         })
-// }
