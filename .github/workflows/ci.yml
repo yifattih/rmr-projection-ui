@@ -7,6 +7,9 @@ on:
       - dev
       - 'feat/**'
       - '!feat/**-poc'
+  pull_request:
+    branches:
+      - dev
 
 jobs:
   build-test:
