@@ -39,6 +39,13 @@ The app leverages a streamlined DevOps pipeline to ensure seamless development, 
 2. **Calculate BMR**: After submitting your details, the app calculates your BMR, giving you insights into your daily calorie needs at rest.
 3. **Visualize Changes**: Track BMR fluctuations over time, using visualizations to monitor the effects of lifestyle and health changes.
 
+## Contributing
+If you'd like to contribute, please read the [Contributing Guidelines](CONTRIBUTING.md) for information on how to:
+
+Set up your development environment
+Follow the branching and commit strategy
+Submit pull requests and get involved in the development process
+
 ## Future Improvements
 ---
 
