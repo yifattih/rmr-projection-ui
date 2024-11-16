@@ -42,9 +42,9 @@ The app leverages a streamlined DevOps pipeline to ensure seamless development, 
 ## Contributing
 If you'd like to contribute, please read the [Contributing Guidelines](CONTRIBUTING.md) for information on how to:
 
-Set up your development environment
-Follow the branching and commit strategy
-Submit pull requests and get involved in the development process
+1. Set up your development environment
+2. Follow the branching and commit strategy
+3. Submit pull requests and get involved in the development process
 
 ## Future Improvements
 ---
@@ -59,6 +59,6 @@ Submit pull requests and get involved in the development process
 This project is licensed under the MIT License. See the `LICENSE` file for more details.
 
 
-[![CI/CD Pipeline](https://github.com/yifattih/bmr_calculator/actions/workflows/ci-cd.yml/badge.svg)](https://github.com/yifattih/bmr_calculator/actions/workflows/ci-cd.yml)
+[![CI Pipeline](https://github.com/yifattih/bmr_calculator/actions/workflows/ci.yml/badge.svg?branch=dev)](https://github.com/yifattih/bmr_calculator/actions/workflows/ci.yml)
 ![Codecov](https://img.shields.io/codecov/c/gh/yifattih/bmr_calculator)
 ![Sonar Quality Gate](https://img.shields.io/sonar/quality_gate/yifattih_bmr_calculator?server=https%3A%2F%2Fsonarcloud.io)
