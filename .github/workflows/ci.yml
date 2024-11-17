@@ -32,7 +32,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r app/requirements.txt # app dependencies
-          pip install pytest pytest-cov flake8 black coverage  # dev/testing dependencies
+          pip install pytest pytest-cov flake8 black coverage bs4 # dev/testing dependencies
 
       # Step 4: Run code formatting check with Black
       - name: Check code formatting with Black
