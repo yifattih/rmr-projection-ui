@@ -1,6 +1,7 @@
 numpy
 Flask
 pytest
+bs4
 pytest-cov
 flake8
 black
