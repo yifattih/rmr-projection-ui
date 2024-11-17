@@ -2,15 +2,10 @@ import unittest
 from bs4 import BeautifulSoup
 
 
-def load_html() -> str:
-    """Fixture to load the index.html content."""
-    with open("app/src/templates/index.html", "r") as file:
-        return file.read()
-
-
 class TestFormStructure(unittest.TestCase):
     def setUp(self) -> None:
-        self.file = load_html()
+        with open("app/src/templates/index.html", "r") as f:
+            self.file = f.read()
         self.soup = BeautifulSoup(self.file, "html.parser")
         self.form = self.soup.find("form")
 
