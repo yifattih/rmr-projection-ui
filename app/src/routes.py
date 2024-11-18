@@ -19,7 +19,7 @@ def process_form_data(data: JSONType) -> dict[str, str | number]:
             # Convert input number string
             value = float(value)  # type: ignore
         except Exception:
-            pass # Forget if string value is not number
+            pass  # Forget if string value is not number
         processed_data.update({key: value})
     return processed_data
 
@@ -40,10 +40,10 @@ def submit() -> Response:
     :return: Input and output data
     :rtype: JSON
     """
-    form_data = request.json # Get data from POST request
+    form_data = request.json  # Get data from POST request
     try:
         processed_data = process_form_data(data=form_data)  # type: ignore
-                # Calculate output from model
+        # Calculate output from model
         modeller = model.Builder(data=processed_data)  # type: ignore
         modeller.build()
         modeller.calculate()
