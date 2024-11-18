@@ -70,7 +70,6 @@ def clear() -> Response:
     :return: Empty data
     :rtype: JSON
     """
-    # Get data from AJAX request
     response_data.clear()
     response = {
         "message": "Data Clearing",
