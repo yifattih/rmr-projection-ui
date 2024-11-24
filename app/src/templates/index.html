@@ -4,91 +4,104 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-    <title>Basal Metabolic Rate Calculator</title>
+    <script src="https://kit.fontawesome.com/42dc2bc760.js" crossorigin="anonymous"></script>    <title>Basal Metabolic Rate Projector</title>
 </head>
 <body>
     <header>
-        <h1>Basal Metabolic Rate <span>Calculator</span></h1>
-        <h5>Welcome</h5>
+        <h1>Basal Metabolic Rate Projector</h1>
     </header>
-    <aside>
-        <!-- Data Input Form -->
-        <form id="data-form">
-            <!-- Section related to body data -->
-            <h3 id="h3-body-data">Body Data</h3>
-            <section id="section-body-data">
-                <label for="select-sex" id="label-sex">Sex</label>
-                <select id="select-sex" class="input-valid" name="sex">
-                    <option  value="men">Men</option>
-                    <option  value="female">Female</option>                    
-                </select>
-
-                <label for="input-age" id="label-age">Age</label>
-                <input id="input-age" type="number" name="age">
-                <label for="input-age" id="label-age-unit">years</label>
-                
-                <label for="input-weight" id="label-weight">Initial Weight</label>
-                <input id="input-weight"  type="number" name="weight">
-                <label for="input-weight" id="label-weight-unit">lbs</label>
-
-                <label for="input-height" id="label-height">Height</label>
-                <input id="input-height"  type="number" name="height">
-                <label for="input-height" id="label-height-unit">inch</label>
-            </section>
-            <!-- Section related to settings for the calculations will be done -->
-            <h3 id="h3-model-settings">Model Settings</h3>
-
-            <section id="section-model-settings">
-
-                <label for="select-units" id="label-units">System of Units</label>
-                <select id="select-units" class="input-valid" name="units">
-                    <option value="imperial">lbs - inch</option>
-                    <option value="metric">kg - cm</option>                    
-                </select>
-
-                <label for="input-time" id="label-time">Time to project</label>
-                <input id="input-time"  type="number" name="time">
-                <label for="input-time" id="label-time-unit">weeks</label>
-            
-                <label for="input-rate" id="label-rate">Weight Loss Rate</label>
-                <input id="input-rate"  class="input-valid" type="number" name="rate" value="2">
-                <label for="input-rate" id="label-rate-unit">lbs</label>
-        
-                <label for="input-energy" id="label-energy">Energy Deficit</label>
-                <input id="input-energy" class="input-valid" type="number" name="energy" value="1000">
-                <label for="input-energy" id="label-energy-unit">cal</label>
-            </section>
-            <!-- Section related to data submission -->
-            <section id="section-buttons">
-                    <button type="submit" id="button-submit">Submit</button>
-                    <button class="clear" id="button-clear">Clear</button>
-            </section>
-        </form>
-    </aside>
     <main>
-        <section id="references">
-            <h3>References</h3>
-            <p>
-                Harris & Benedict (1918) &#8212 A Biometric Study of Human Basal Metabolism <br>
-                <a target="_blank" rel="noopener" href="https://doi.org/10.1073/pnas.4.12.370">DOI: 10.1073/pnas.4.12.370</a>
-            </p>
-            <p>
-                Roza & Shizgal (1984) &#8212 The Harris Benedict equation reevaluated: resting energy requirements and the body cell mass <br>
-                <a target="_blank" rel="noopener" href="https://doi.org/10.1093/ajcn/40.1.168">DOI: 10.1093/ajcn/40.1.168</a>
-            </p>
-            <p>
-                Mifflin, <i>et al.</i> (1990): A new predictive equation for resting energy expenditure in healthy individuals <br>
-                <a target="_blank" rel="noopener" href="https://doi.org/10.1093/ajcn/51.2.241">DOI: 10.1093/ajcn/51.2.241</a>
-            </p>
+        <aside>
+            <form>
+                <section class="form-section toggles">
+                    <div class="sex-container">
+                        <span><i class="fa-solid fa-venus"></i></span>
+                        <div class="toggle-container">
+                            <input type="checkbox" class="toggle-input">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142" class="toggle">
+                                <path d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z" class="toggle-background"></path>
+                                <rect rx="6" height="64" width="12" y="39" x="64" class="toggle-icon on"></rect>
+                                <path d="M221 91C232.046 91 241 82.0457 241 71C241 59.9543 232.046 51 221 51C209.954 51 201 59.9543 201 71C201 82.0457 209.954 91 221 91ZM221 103C238.673 103 253 88.6731 253 71C253 53.3269 238.673 39 221 39C203.327 39 189 53.3269 189 71C189 88.6731 203.327 103 221 103Z" fill-rule="evenodd" class="toggle-icon off"></path>
+                                <g filter="url('#goo')">
+                                    <rect fill="#fff" rx="29" height="58" width="116" y="42" x="13" class="toggle-circle-center"></rect>
+                                    <rect fill="#fff" rx="58" height="114" width="114" y="14" x="14" class="toggle-circle left"></rect>
+                                    <rect fill="#fff" rx="58" height="114" width="114" y="14" x="164" class="toggle-circle right"></rect>
+                                </g>
+                                <filter id="goo">
+                                    <feGaussianBlur stdDeviation="10" result="blur" in="SourceGraphic"></feGaussianBlur>
+                                    <feColorMatrix result="goo" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" mode="matrix" in="blur"></feColorMatrix>
+                                </filter>
+                            </svg>
+                          </div>
+                        <span><i class="fa-solid fa-mars"></i></span>
+                    </div>
+                    <div class="units-container">
+                        <span>Imp</span>
+                        <div class="toggle-container">
+                            <input type="checkbox" class="toggle-input">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 292 142" class="toggle">
+                                <path d="M71 142C31.7878 142 0 110.212 0 71C0 31.7878 31.7878 0 71 0C110.212 0 119 30 146 30C173 30 182 0 221 0C260 0 292 31.7878 292 71C292 110.212 260.212 142 221 142C181.788 142 173 112 146 112C119 112 110.212 142 71 142Z" class="toggle-background"></path>
+                                <rect rx="6" height="64" width="12" y="39" x="64" class="toggle-icon on"></rect>
+                                <path d="M221 91C232.046 91 241 82.0457 241 71C241 59.9543 232.046 51 221 51C209.954 51 201 59.9543 201 71C201 82.0457 209.954 91 221 91ZM221 103C238.673 103 253 88.6731 253 71C253 53.3269 238.673 39 221 39C203.327 39 189 53.3269 189 71C189 88.6731 203.327 103 221 103Z" fill-rule="evenodd" class="toggle-icon off"></path>
+                                <g filter="url('#goo')">
+                                    <rect fill="#fff" rx="29" height="58" width="116" y="42" x="13" class="toggle-circle-center"></rect>
+                                    <rect fill="#fff" rx="58" height="114" width="114" y="14" x="14" class="toggle-circle left"></rect>
+                                    <rect fill="#fff" rx="58" height="114" width="114" y="14" x="164" class="toggle-circle right"></rect>
+                                </g>
+                                <filter id="goo">
+                                    <feGaussianBlur stdDeviation="10" result="blur" in="SourceGraphic"></feGaussianBlur>
+                                    <feColorMatrix result="goo" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" mode="matrix" in="blur"></feColorMatrix>
+                                </filter>
+                            </svg>
+                        </div>
+                        <span>SI</span>
+                    </div>
+                </section>
+                <section class="form-section range">
+                    <label class="label" for="age-slider">Age</label>
+                    <input type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" class="level" name="age">
+                    <output class= "level-value" id="ageout">50</output>
+                    <label class="unit" for="age-slider">years</label>
+                </section>
+                <section class="form-section range">
+                    <label class="label" for="weight-slider">Weight</label>
+                    <input type="range" min="50" max="2000" value="500" oninput="weightout.value = this.value" class="level" id="weight" name="weight">
+                    <output class= "level-value" id="weightout">460</output>
+                    <label class="unit" for="weight-slider">lbs</label>
+                </section>
+                <section class="form-section range">
+                    <label class="label" for="height-slider">Height</label>
+                    <input type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" class="level" id="height" name="height">
+                    <output class= "level-value" id="heightout">85</output>
+                    <label class="unit" for="height-slider">inch</label>
+                </section>
+                <section class="form-section range">
+                    <label class="label" for="rate-slider">WLR</label>
+                    <input type="range" min="0" max="20" step="0.1" value="2" oninput="rateout.value = this.value" class="level" id="rate" name="rate">
+                    <output class= "level-value" id="rateout">2</output>
+                    <label class="unit" for="rate-slider">lbs</label>
+                </section>
+                <section class="form-section range">
+                    <label class="label" for="time-slider">Time</label>
+                    <input type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" class="level" id="time" name="time">
+                    <output class= "level-value" id="timeout">24</output>
+                    <label class="unit" for="time-slider">weeks</label>
+                </section>
+            </form>
+            <!-- <button class="btn">Submit</button> -->
+        </aside>
+        <section>
+            <article>
+                <h2>Basal Metabolic Rate by Activity Factor</h2>
+                <span><i class="fa-solid fa-heart"></i></span>
+                <span><i class="fa-solid fa-heart-circle-check"></i></span>
+                <span><i class="fa-solid fa-heart-circle-exclamation"></i></span>
+                <span><i class="fa-solid fa-heart-circle-bolt"></i></span>
+            </article>
+            <article>
+                <h2>Plots</h2>
+            </article>
         </section>
-        <article>
-            <figure>
-                Figure
-                <figcaption>
-                    Figure Caption
-                </figcaption>
-            </figure>
-        </article>
     </main>
     <footer>
         <strong>Disclaimer:</strong> The information provided in this material is for 
@@ -101,8 +114,4 @@
         for any errors or omissions, or for any outcomes resulting from the 
         use of this information.
     </footer>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script>
-    <script src="{{ url_for('static', filename='script.js') }}"></script>
 </body>
-</html>
