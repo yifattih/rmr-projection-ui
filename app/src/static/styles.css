@@ -25,7 +25,7 @@ html {
   --font-size-icons: 3rem;
 
   --gap-row: 2rem;
-  --gap-column: 1rem;
+  --gap-column: 3rem;
   --layout-padding: 2rem;
 
   /* form */
@@ -48,7 +48,7 @@ body {
   min-height: 100%;
   margin: 0;
   gap: var(--gap-row);
-  padding: var(--layout-padding);
+  padding: var(--layout-padding) var(--layout-padding);
 }
 
 header {
@@ -56,7 +56,7 @@ header {
   background: linear-gradient(145deg, #ffffff, #e9e8e8);
   box-shadow:  0.5rem 0.5rem 1rem #d1d1d1,
                -0.5rem -0.5rem 1rem #ffffff;
-  padding: var(--layout-padding);
+  padding: var(--layout-padding) var(--layout-padding);
 }
 
 header h1 {
@@ -99,7 +99,7 @@ main aside form > section {
   flex-flow: row nowrap;
   justify-content: center;
   align-items: center;
-  gap: 5rem;
+  gap: var(--gap-column);
   text-transform: uppercase;
   font-weight: bold;
 }
@@ -113,7 +113,13 @@ main aside form > section {
   background: linear-gradient(145deg, #ffffff, #e9e8e8);
   box-shadow:  0.5rem 0.5rem 1rem #d1d1d1,
                -0.5rem -0.5rem 1rem #ffffff;
-  padding: var(--layout-padding);
+  padding: var(--layout-padding) var(--layout-padding);
+  transition: transform 0.5s;
+}
+
+.form-section .sex-container:hover,
+.form-section .units-container:hover {
+  transform: translateY(1rem);
 }
 
 .form-section.range {
@@ -182,12 +188,13 @@ main aside form > section {
 }
 
 main > section {
+  margin: 0;
   flex: 4 1 0;
   border-radius: 4.4rem;
   background: linear-gradient(145deg, #ffffff, #e9e8e8);
   box-shadow:  0.5rem 0.5rem 1rem #d1d1d1,
                -0.5rem -0.5rem 1rem #ffffff;
-  /* padding: var(--layout-padding); */
+  padding: 0 var(--layout-padding);
 }
 
 /* /////////////////////////////////////////////////////*/
@@ -204,7 +211,7 @@ span {
   position: relative;
   aspect-ratio: 292 / 142;
   height: 3.5rem;
-  /* scale: 1.25; */
+  scale: 0.8;
 }
 
 .toggle-input {
@@ -288,7 +295,7 @@ span {
 /* /////////////////////////////////////////////////////*/
 /* ///////////////// Submit Button ////////////////////*/
 /* ///////////////////////////////////////////////////*/
-.btn {
+/* .btn {
   background: #e3edf7;
   border-radius: 10px;
   box-shadow: 6px 6px 10px -1px rgba(0,0,0,0.15),
@@ -306,11 +313,11 @@ span {
 	      0px 12px 10px -10px rgba(0,0,0,0.05);
   border: 1px solid rgba(0,0,0,0.1);
   transform: translateY(0.5em);
-}
+} */
 
 
 /* Mobile view (screen width 767px and below not inclusive) */
-@media (width <= 767px) {
+@media (width <= 1023px) {
   main aside {
     min-width: 100%;
   }
