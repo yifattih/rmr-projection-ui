@@ -9,7 +9,7 @@
   --font-size-h1: 3.2rem;
   --font-size-h2: 2rem;
   --font-size-h3: 1.4rem;
-  --font-size-icons: 2.4rem;
+  --font-size-icons: 2.8rem;
 
   /* Colors */
   --container-color: #FFFFFF;
@@ -18,6 +18,8 @@
   --font-color-interactive: #4CAF50;
   --button-color-primary: #FF7043;
   --button-color-hover: #26C6DA;
+  --card-color-primary: rgba(255, 111, 67, 0.5);
+  --card-color-hover: rgba(38, 197, 218, 0.5);
   /* Spacing */
   --gap-vertical: 2rem;
   --gap-horizontal: 3rem;
@@ -45,7 +47,7 @@
 * {
   border-style: solid;
   border-color: red;
-  border-width: 0.1px;
+  border-width: 0px;
 }
 
 body {
@@ -348,20 +350,17 @@ article.activity-factor {
 
 article .container {
   min-width: 30rem;
-  /* padding: 0.5rem; */
   perspective: 100rem;
 }
 
 .card {
   margin: 0;
-  /* padding-top: 1.25rem; */
-  border: 0.1rem solid rgb(255, 255, 255);
+  /* border: 0.1rem solid rgb(255, 255, 255); */
   transform-style: preserve-3d;
   background: linear-gradient(135deg,#0000 18.75%,#f3f3f3 0 31.25%,#0000 0),
               repeating-linear-gradient(45deg, #f3f3f3 -6.25% 6.25%,#ffffff 0 18.75%);
   background-size: 10rem 3rem;
-  /* background-position: 0 0, 0 0; */
-  /* background-color: #f0f0f0; */
+  height: 100%;
   width: 100%;
   box-shadow: rgba(142, 142, 142, 0.435) 0rem 2rem 2rem -1rem;
   transition: all 0.5s ease-in-out;
@@ -372,8 +371,13 @@ article .container {
   transform: rotate3d(0.5, 1, 0, 30deg);
 }
 
+.card:hover .content-box{
+  background: var(--card-color-hover);
+}
+
 .content-box {
-  background: var(--button-color-primary);
+  height: 100%;
+  background: var(--card-color-primary);
   transition: all 0.5s ease-in-out;
   padding: 1rem 1.5rem 0rem 1.5rem;
   transform-style: preserve-3d;
@@ -389,12 +393,12 @@ article .container {
 }
 
 .content-box .card-title:hover {
-  transform: translate3d(0px, 0px, 60px);
+  transform: translate3d(0px, 0px, 6rem);
 }
 
 .content-box .card-content {
   margin-top: 1rem;
-  max-width: fit-content;
+  max-width: 16rem;
   font-size: var(--fornt-size-normal);
   color: var(--font-color-primary);
   transition: all 0.5s ease-in-out;
@@ -402,7 +406,7 @@ article .container {
 }
 
 .content-box .card-content:hover {
-  transform: translate3d(0px, 0px, 60px);
+  transform: translate3d(0px, 0px, 6rem);
 }
 
 .value-box {
@@ -414,7 +418,7 @@ article .container {
 }
 
 .value-box:hover {
-  transform: translate3d(0px, 0px, 60px);
+  transform: translate3d(0px, 0px, 6rem);
 }
 
 .value-box span {
