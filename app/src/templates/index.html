@@ -14,54 +14,54 @@
         <aside>
             <form>
                 <section class="toggles-container">
+                    <div class="units-container">
+                        <label class="switch">
+                            <input type="checkbox">
+                            <span class="slider" title="Select system of units"></span>
+                        </label>
+                    </div>
                     <div class="sex-container">
                         <span>
                             <i class="fa-solid fa-venus"></i>
                         </span>
                         <label class="switch">
                             <input type="checkbox">
-                            <span class="slider"></span>
+                            <span class="slider" title="Select biological sex"></span>
                         </label>
                         <span>
                             <i class="fa-solid fa-mars"></i>
                         </span>
                     </div>
-                    <div class="units-container">
-                        <label class="switch">
-                            <input type="checkbox">
-                            <span class="slider"></span>
-                        </label>
-                    </div>
                 </section>
                 <section class="form-section range">
                     <label class="label" for="age-slider">Age</label>
-                    <input type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" class="level" name="age">
                     <output class= "level-value" id="ageout">50</output>
                     <label class="unit" for="age-slider">years</label>
+                    <input class="level" type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" name="age">
                 </section>
                 <section class="form-section range">
                     <label class="label" for="weight-slider">Weight</label>
-                    <input type="range" min="50" max="2000" value="500" oninput="weightout.value = this.value" class="level" id="weight" name="weight">
                     <output class= "level-value" id="weightout">460</output>
                     <label class="unit" for="weight-slider">lbs</label>
+                    <input type="range" min="50" max="999" value="500" oninput="weightout.value = this.value" class="level" id="weight" name="weight">
                 </section>
                 <section class="form-section range">
                     <label class="label" for="height-slider">Height</label>
-                    <input type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" class="level" id="height" name="height">
                     <output class= "level-value" id="heightout">85</output>
                     <label class="unit" for="height-slider">inch</label>
+                    <input type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" class="level" id="height" name="height">
                 </section>
                 <section class="form-section range">
                     <label class="label" for="rate-slider">WLR</label>
-                    <input type="range" min="0" max="20" step="0.1" value="2" oninput="rateout.value = this.value" class="level" id="rate" name="rate">
                     <output class= "level-value" id="rateout">2</output>
                     <label class="unit" for="rate-slider">lbs</label>
+                    <input type="range" min="0" max="20" step="0.1" value="2" oninput="rateout.value = this.value" class="level" id="rate" name="rate">
                 </section>
                 <section class="form-section range">
                     <label class="label" for="time-slider">Time</label>
-                    <input type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" class="level" id="time" name="time">
                     <output class= "level-value" id="timeout">24</output>
                     <label class="unit" for="time-slider">weeks</label>
+                    <input type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" class="level" id="time" name="time">
                 </section>
             </form>
             <!-- <button class="btn">Submit</button> -->
@@ -72,89 +72,108 @@
                 <div class="container">
                     <div class="card">
                         <div class="content-box">
-                            <span class="card-title">
-                                BMR&#8669Sedentary
-                            </span> <br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                Day-to-day physical activity
-                            </a>
-                        </div>
-                        <div class="value-box">
-                            <span>
-                                <span><i class="fa-solid fa-heart-pulse"></i></span>
-                            </span>
-                            <p id="bmr-value">
-                                10000 cal
-                            </p>
-                        </div>
-                    </div>
-                </div>
-                <div class="container">
-                    <div class="card">
-                        <div class="content-box">
-                            <span class="card-title">
-                                Low Active
-                            </span> <br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                Walking 1.5–3 m at 3–4 mph
-                            </a><br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                Day-to-day physical activity
-                            </a>
-                        </div>
-                        <div class="value-box">
-                            <span>
-                                <span><i class="fa-solid fa-heart-circle-plus"></i></span>
-                            </span>
-                            <p id="bmr-value">
-                                10000 cal
-                            </p>
+                            <div class="card-body">
+                                <span class="card-title">
+                                    Sedentary
+                                </span>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Day-to-day activity
+                                </a>
+                            </div>
+                            <div class="value-box" title="Activity Factor
+Male = 1.00
+Female = 1.00">
+                                <span>
+                                    <span><i class="fa-solid fa-heart"></i></span>
+                                </span>
+                                <p id="bmr-value">
+                                    10000 cal
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="card">
                         <div class="content-box">
-                            <span class="card-title">
-                                Active
-                            </span> <br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                Walking 3+ at 3–4 mph
-                            </a><br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                60+ m moderate activity
-                            </a>
-                        </div>
-                        <div class="value-box">
-                            <span>
-                                <span><i class="fa-solid fa-heart-circle-exclamation"></i></span>
-                            </span>
-                            <p id="bmr-value">
-                                10000 cal
-                            </p>
+                            <div class="card-body">
+                                <span class="card-title">Low Active</span>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <span class="emoji">
+                                        <i class="fa-solid fa-person-walking"></i>
+                                    </span> 
+                                    1.5–3 m at 3–4 mph
+                                </a>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Day-to-day activity
+                                </a>
+                            </div>
+                            <div class="value-box" title="Activity Factor
+Male = 1.11
+Female = 1.12">
+                                <span>
+                                    <span><i class="fa-solid fa-heart-pulse"></i></span>
+                                </span>
+                                <p id="bmr-value">
+                                    10000 cal
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="container">
                     <div class="card">
                         <div class="content-box">
-                            <span class="card-title">
-                                Very Active
-                            </span> <br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                Walking 7.5+ m at 3–4 mph
-                            </a><br>
-                            <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                60+ m vigorous activity
-                            </a>
+                            <div class="card-body">
+                                <span class="card-title">Active</span>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <span class="emoji">
+                                        <i class="fa-solid fa-person-walking"></i>
+                                    </span> 
+                                    3+ m at 3–4 mph
+                                </a>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    60+ m brisk activity
+                                </a>
+                            </div>
+                            <div class="value-box" title="Activity Factor 
+Male = 1.25
+Female = 1.27">
+                                <span>
+                                    <span><i class="fa-solid fa-heart-circle-exclamation"></i></span>
+                                </span>
+                                <p id="bmr-value">
+                                    10000 cal
+                                </p>
+                            </div>
                         </div>
-                        <div class="value-box">
-                            <span>
-                                <span><i class="fa-solid fa-heart-circle-bolt"></i></span>
-                            </span>
-                            <p id="bmr-value">
-                                10000 cal
-                            </p>
+                    </div>
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="content-box">
+                            <div class="card-body">
+                                <span class="card-title">Very Active</span>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <span class="emoji">
+                                        <i class="fa-solid fa-person-walking"></i>
+                                    </span> 
+                                    7.5+ m at 3–4 mph
+                                </a>
+                                <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    60+ m vigorous activity
+                                </a>
+                            </div>
+                            <div class="value-box" title="Activity Factor
+Male = 1.48
+Female = 1.45">
+                                <span>
+                                    <span><i class="fa-solid fa-heart-circle-bolt"></i></span>
+                                </span>
+                                <p id="bmr-value">
+                                    10000 cal
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
