@@ -271,6 +271,22 @@ section.toggles-container {
   content: 'SI';
 }
 
+.units-container .tooltiptext,
+.sex-container .tooltiptext {
+  visibility: hidden;
+}
+
+.units-container:hover .tooltiptext,
+.sex-container:hover .tooltiptext {
+  visibility: visible;
+}
+
+.units-container .tooltiptext,
+.sex-container:hover .tooltiptext {
+  bottom: 80%;
+  min-width: 10rem;
+}
+
 /* /////////////////////////////////////////////////////*/
 /* /////////////////// Aside Form /////////////////////*/
 /* ///////////////////   Ranges  /////////////////////*/
@@ -343,6 +359,38 @@ section.toggles-container {
   border-color: var(--button-color-hover);
 }
 
+.form-section .tooltip {
+  max-height: fit-content;
+}
+
+.form-section .tooltiptext {
+  visibility: hidden;
+}
+
+.form-section .tooltiptext.age {
+  bottom: 75%;
+}
+
+.form-section .tooltiptext.weight {
+  bottom: 61%;
+}
+
+.form-section .tooltiptext.height {
+  bottom: 46%;
+}
+
+.form-section:hover .tooltiptext {
+  visibility: visible;
+}
+
+.form-section .tooltiptext.wlr {
+  bottom: 31.25%;
+}
+
+.form-section .tooltiptext.time {
+  bottom: 16.5%;
+}
+
 .form-section:hover .level::-webkit-slider-thumb {
   -webkit-appearance: none;
   width: 0;
@@ -351,7 +399,7 @@ section.toggles-container {
 }
 
 .form-section .level:hover {
-  height: calc(var(--form-height) * 1.5);
+  height: calc(var(--form-height) * 1.1);
 }
 
 /* /////////////////////////////////////////////////////*/
@@ -451,6 +499,19 @@ article .container {
   transform: translate3d(0rem, 0rem, 00.75rem);
 }
 
+.card-content .tooltiptext {
+  left: 75%;
+  bottom: 0;
+  visibility: hidden;
+  color: var(--font-color-primary);
+  font-size: var(--font-size-normal);
+}
+
+
+.content-box .card-content:hover .tooltiptext {
+  visibility: visible;
+}
+
 .content-box .card-content .emoji {
   font-size: var(--font-size-h3);
 }
@@ -493,6 +554,38 @@ article .container {
   /* text-align: center; */
   font-size: var(--font-size-icons);
   color: var(--font-color-primary);
+}
+
+.tooltiptext {
+  position: absolute;
+}
+
+.value-box .tooltip {
+  position: relative;
+  display: inline-block;
+  /* border-bottom: 1px dotted black; */
+}
+
+.value-box .tooltip .tooltiptext {
+  visibility: hidden;
+  min-width: 6.5rem;
+  text-align: left;
+  
+  /* Position the tooltip */
+  z-index: 1;
+  /* top: 100%; */
+  bottom: 0;
+  right: 50%;
+  /* left: 50%; */
+  /* margin-left: -1px; */
+}
+
+.tooltiptext .tooltip-content {
+  font-size: var(--font-size-small);
+}
+
+.value-box:hover .tooltiptext {
+  visibility: visible;
 }
 
 /* //////////////////////////////////////// */

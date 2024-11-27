@@ -15,18 +15,28 @@
             <form>
                 <section class="toggles-container">
                     <div class="units-container">
+                        <div class="tooltip">
+                            <span class="tooltiptext age">
+                                <p class="tooltip-content">System of units?</p>
+                            </span>
+                        </div>
                         <label class="switch">
                             <input type="checkbox">
-                            <span class="slider" title="Select system of units"></span>
+                            <span class="slider"></span>
                         </label>
                     </div>
                     <div class="sex-container">
+                        <div class="tooltip">
+                            <span class="tooltiptext age">
+                                <p class="tooltip-content">Sex at birth?</p>
+                            </span>
+                        </div>
                         <span>
                             <i class="fa-solid fa-venus"></i>
                         </span>
                         <label class="switch">
                             <input type="checkbox">
-                            <span class="slider" title="Select biological sex"></span>
+                            <span class="slider"></span>
                         </label>
                         <span>
                             <i class="fa-solid fa-mars"></i>
@@ -34,31 +44,66 @@
                     </div>
                 </section>
                 <section class="form-section range">
-                    <label class="label" for="age-slider">Age</label>
+                    <label class="label" for="age-slider">
+                        <div class="tooltip">
+                            <span class="tooltiptext age">
+                                <p class="tooltip-content">Current weight?</p>
+                            </span>
+                        </div>
+                        Age
+                    </label>
                     <output class= "level-value" id="ageout">50</output>
                     <label class="unit" for="age-slider">years</label>
                     <input class="level" type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" name="age">
                 </section>
                 <section class="form-section range">
-                    <label class="label" for="weight-slider">Weight</label>
-                    <output class= "level-value" id="weightout">460</output>
+                    <label class="label" for="weight-slider">
+                        <div class="tooltip">
+                            <span class="tooltiptext weight">
+                                <p class="tooltip-content">Current weight?</p>
+                            </span>
+                        </div>
+                        Weight
+                    </label>
+                    <output class= "level-value" id="weightout">500</output>
                     <label class="unit" for="weight-slider">lbs</label>
                     <input type="range" min="50" max="999" value="500" oninput="weightout.value = this.value" class="level" id="weight" name="weight">
                 </section>
                 <section class="form-section range">
-                    <label class="label" for="height-slider">Height</label>
+                    <label class="label" for="height-slider">
+                        <div class="tooltip">
+                            <span class="tooltiptext height">
+                                <p class="tooltip-content">Current height?</p>
+                            </span>
+                        </div>
+                        Height
+                    </label>
                     <output class= "level-value" id="heightout">85</output>
                     <label class="unit" for="height-slider">inch</label>
                     <input type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" class="level" id="height" name="height">
                 </section>
                 <section class="form-section range">
-                    <label class="label" for="rate-slider">WLR</label>
+                    <label class="label" for="rate-slider">
+                        <div class="tooltip">
+                            <span class="tooltiptext wlr">
+                                <p class="tooltip-content">Weekly weight loss goal?</p>
+                            </span>
+                        </div>
+                        WLR
+                    </label>
                     <output class= "level-value" id="rateout">2</output>
                     <label class="unit" for="rate-slider">lbs</label>
                     <input type="range" min="0" max="20" step="0.1" value="2" oninput="rateout.value = this.value" class="level" id="rate" name="rate">
                 </section>
                 <section class="form-section range">
-                    <label class="label" for="time-slider">Time</label>
+                    <label class="label" for="time-slider">
+                        <div class="tooltip">
+                            <span class="tooltiptext time">
+                                <p class="tooltip-content">How many weels to project?</p>
+                            </span>
+                        </div>
+                        Time
+                    </label>
                     <output class= "level-value" id="timeout">24</output>
                     <label class="unit" for="time-slider">weeks</label>
                     <input type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" class="level" id="time" name="time">
@@ -67,7 +112,7 @@
             <!-- <button class="btn">Submit</button> -->
         </aside>
         <section>
-            <h2>Basal Metabolic Rate by Activity Factor</h2>
+            <!-- <h2>Basal Metabolic Rate by Activity Factor</h2> -->
             <article class="activity-factor">
                 <div class="container">
                     <div class="card">
@@ -77,14 +122,26 @@
                                     Sedentary
                                 </span>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     Day-to-day activity
                                 </a>
                             </div>
-                            <div class="value-box" title="Activity Factor
-Male = 1.00
-Female = 1.00">
+                            <div class="value-box">
                                 <span>
-                                    <span><i class="fa-solid fa-heart"></i></span>
+                                    <span>
+                                        <div class="tooltip">
+                                            <span class="tooltiptext">
+                                                <p class="tooltip-content">Activity Factor</p>
+                                                <p class="tooltip-content">Males = 1.00</p>
+                                                <p class="tooltip-content">Females = 1.00</p>
+                                            </span>
+                                        </div>
+                                        <i class="fa-solid fa-heart"></i>
+                                    </span>
                                 </span>
                                 <p id="bmr-value">
                                     10000 cal
@@ -97,22 +154,41 @@ Female = 1.00">
                     <div class="card">
                         <div class="content-box">
                             <div class="card-body">
-                                <span class="card-title">Low Active</span>
+                                <span class="card-title">
+                                    Low Active
+                                </span>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     <span class="emoji">
                                         <i class="fa-solid fa-person-walking"></i>
                                     </span> 
                                     1.5–3 m at 3–4 mph
                                 </a>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     Day-to-day activity
                                 </a>
                             </div>
-                            <div class="value-box" title="Activity Factor
-Male = 1.11
-Female = 1.12">
+                            <div class="value-box">
                                 <span>
-                                    <span><i class="fa-solid fa-heart-pulse"></i></span>
+                                    <span>
+                                        <div class="tooltip">
+                                            <span class="tooltiptext">
+                                                <p class="tooltip-content">Activity Factor</p>
+                                                <p class="tooltip-content">Males = 1.11</p>
+                                                <p class="tooltip-content">Females = 1.12</p>
+                                            </span>
+                                        </div>
+                                        <i class="fa-solid fa-heart-pulse"></i>
+                                    </span>
                                 </span>
                                 <p id="bmr-value">
                                     10000 cal
@@ -125,22 +201,41 @@ Female = 1.12">
                     <div class="card">
                         <div class="content-box">
                             <div class="card-body">
-                                <span class="card-title">Active</span>
+                                <span class="card-title">
+                                    Active
+                                </span>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     <span class="emoji">
                                         <i class="fa-solid fa-person-walking"></i>
                                     </span> 
                                     3+ m at 3–4 mph
                                 </a>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     60+ m brisk activity
                                 </a>
                             </div>
-                            <div class="value-box" title="Activity Factor 
-Male = 1.25
-Female = 1.27">
+                            <div class="value-box">
                                 <span>
-                                    <span><i class="fa-solid fa-heart-circle-exclamation"></i></span>
+                                    <span>
+                                        <div class="tooltip">
+                                            <span class="tooltiptext">
+                                                <p class="tooltip-content">Activity Factor</p>
+                                                <p class="tooltip-content">Males = 1.25</p>
+                                                <p class="tooltip-content">Females = 1.27</p>
+                                            </span>
+                                        </div>
+                                        <i class="fa-solid fa-heart-circle-exclamation"></i>
+                                    </span>
                                 </span>
                                 <p id="bmr-value">
                                     10000 cal
@@ -153,22 +248,41 @@ Female = 1.27">
                     <div class="card">
                         <div class="content-box">
                             <div class="card-body">
-                                <span class="card-title">Very Active</span>
+                                <span class="card-title">
+                                    Very Active
+                                </span>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     <span class="emoji">
                                         <i class="fa-solid fa-person-walking"></i>
                                     </span> 
                                     7.5+ m at 3–4 mph
                                 </a>
                                 <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <div class="tooltip">
+                                        <span class="tooltiptext">
+                                            <p class="tooltip-content">Click!</p>
+                                        </span>
+                                    </div>
                                     60+ m vigorous activity
                                 </a>
                             </div>
-                            <div class="value-box" title="Activity Factor
-Male = 1.48
-Female = 1.45">
+                            <div class="value-box">
                                 <span>
-                                    <span><i class="fa-solid fa-heart-circle-bolt"></i></span>
+                                    <span>
+                                        <div class="tooltip">
+                                            <span class="tooltiptext">
+                                                <p class="tooltip-content">Activity Factor</p>
+                                                <p class="tooltip-content">Males = 1.48</p>
+                                                <p class="tooltip-content">Females = 1.45</p>
+                                            </span>
+                                        </div>
+                                        <i class="fa-solid fa-heart-circle-bolt"></i>
+                                    </span>
                                 </span>
                                 <p id="bmr-value">
                                     10000 cal
