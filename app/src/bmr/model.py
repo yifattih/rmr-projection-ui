@@ -13,10 +13,10 @@ class Builder:
         self.age = data["age"]
         self.height = data["height"]
         self.weight = data["weight"]
-        self.weeks = data["weeks"]
+        self.weeks = data["time"]
         self.units = data["units"]
-        self.weight_loss_rate = data["weight_loss_rate"]
-        self.energy_deficit = data["energy_deficit"]
+        self.weight_loss_rate = data["rate"]
+        self.energy_deficit = 1000
         self.sex = data["sex"]
         self.time_proj = time_proj.calculate(weeks=self.weeks)
         self.weight_proj = weight_proj.calculate(

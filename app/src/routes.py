@@ -13,14 +13,14 @@ response_data = []
 
 
 def process_form_data(data: JSONType) -> dict[str, str | number]:
-    processed_data = {}
-    for key, value in data.items():
-        try:
-            # Convert input number string
-            value = float(value)  # type: ignore
-        except Exception:
-            pass  # Forget if string value is not number
-        processed_data.update({key: value})
+    processed_data = {"sex": data["sex"],
+                      "units": data["units"],
+                      "age": float(data["age"]),
+                      "weight": float(data["weight"]),
+                      "height": float(data["height"]),
+                      "rate": float(data["rate"]),
+                      "time": int(data["time"])
+                      }
     return processed_data
 
 
@@ -34,13 +34,17 @@ def home() -> str:
 
 @app.route("/submit", methods=["POST"])
 def submit() -> Response:
+    # data = request.form
+    # response = {"message": "Data received successfully!",
+    #             "data": data}
+    # return jsonify(response)
     """
     Route to handle form data
 
     :return: Input and output data
     :rtype: JSON
     """
-    form_data = request.json  # Get data from POST request
+    form_data = request.form  # Get data from POST request
     try:
         processed_data = process_form_data(data=form_data)  # type: ignore
         # Calculate output from model

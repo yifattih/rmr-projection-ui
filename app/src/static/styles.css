@@ -282,7 +282,7 @@ section.toggles-container {
 }
 
 .units-container .tooltiptext,
-.sex-container:hover .tooltiptext {
+.sex-container .tooltiptext {
   bottom: 80%;
   min-width: 10rem;
 }
