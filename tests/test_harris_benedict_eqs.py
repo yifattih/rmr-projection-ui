@@ -12,10 +12,12 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         weight_initial = 10
         weight_loss_rate = 2
         energy_deficit = 0
+        sex = 'male'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,
             time_projection=time_projected,
+            sex=sex,
             weight=weight_initial,
             energy_deficit=energy_deficit,
         )
@@ -38,10 +40,12 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         units = "imperial"
         weight_loss_rate = 2
         energy_deficit = 0
+        sex='male'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,
             time_projection=time_projected,
+            sex=sex,
             units="imperial",
             weight=weight_initial,
             energy_deficit=energy_deficit,
@@ -62,11 +66,13 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = 10
         energy_deficit = 0
+        sex='male'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
                 height=height,
                 time_projection=time_projected,
+                sex=sex,
                 weight=weight_initial,
                 energy_deficit=energy_deficit,
             )
@@ -79,11 +85,13 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
+        sex = 'male'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
                 height=height,
                 time_projection=time_projected,
+                sex=sex,
                 weight=weight_initial,  # type: ignore
                 energy_deficit=energy_deficit,
             )
@@ -96,11 +104,13 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([])
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
+        sex = 'male'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
                 height=height,
                 time_projection=time_projected,
+                sex=sex,
                 weight=weight_initial,  # type: ignore
                 energy_deficit=energy_deficit,
             )
@@ -113,11 +123,13 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = -1
         energy_deficit = 0
+        sex = 'male'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
                 height=height,
                 time_projection=time_projected,
+                sex=sex,
                 weight=weight_initial,
                 energy_deficit=energy_deficit,
             )
@@ -130,33 +142,38 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = 10
         energy_deficit = -10
+        sex = 'male'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
                 height=height,
                 time_projection=time_projected,
+                sex=sex,
                 weight=weight_initial,
                 energy_deficit=energy_deficit,
             )
 
-    def test_men_eq_in_pounds_return_valid_result(self) -> None:
+    def test_male_imperial_return_valid_result(self) -> None:
         age = 33
         height = 71
         weight_initial = 196
         time_projected = np.array([0])
+        sex = 'male'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,
             weight=weight_initial,
             time_projection=time_projected,
+            sex=sex
         )
         bmr_expected, bmr_deficit_expected = (
-            np.array([1968.13]),
-            np.array([968.13]),
+            np.array([1968.46]),
+            np.array([968.46])
         )
         (bmr_actual, bmr_deficit_actual) = np.round(
-            harris_benedict.men_eq(), 2
+            harris_benedict.get_bmr_and_deficit(), 2
         )
+
         for i in range(0, len(bmr_expected)):
             self.assertEqual(bmr_expected[i], bmr_actual[i])
             self.assertEqual(bmr_deficit_expected[i], bmr_deficit_actual[i])
