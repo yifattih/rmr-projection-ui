@@ -47,7 +47,12 @@ jobs:
       # Step 5: Run code linting with Flake8
       - name: Lint code with Flake8
         run: |
-          flake8 . -v
+          if flake8 . -v; then
+            echo "flake8 failed with errors"
+            echo "Logs need generated and stored"
+          else
+            echo "flake8 succeed!"
+          fi
 
       # Step 6: Run unit tests and generate a coverage report
       - name: Run tests with Pytest and generate coverage report

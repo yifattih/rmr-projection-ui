@@ -1,6 +1,6 @@
 from typing import TypeAlias
 from flask import Flask, Response, render_template, request, jsonify
-from bmr import model
+from app.src.bmr import model
 
 app = Flask(__name__)
 

@@ -88,12 +88,12 @@ class Mifflin:
     """Mifflin-St.Jeor bmr equation
     This class will calculat the BMR using the Mifflin-St. Jeor
     equation defined below:
-    for men:
+    for male:
         metric
         BMR = 10*weight[kg] + 6.25*height[cm] - 5*age[years] + 5
         imperial
         BMR = 4.536*weight[lbs] + 15.875*height[inches] − 5*age[years] + 5
-    for women:
+    for female:
         metric
         BMR = 10*weight[kg] + 6.25*height[cm] - 5*age[years] - 161
         imperial
@@ -129,7 +129,7 @@ class Mifflin:
             "Units must be on " "imperial or metric" "system"
         )
 
-        assert sex in ['men', 'female'], ('Sex must be male or female')
+        assert sex in ['male', 'female'], ('Sex must be male or female')
 
         if units == "imperial":
             self.height_unit = "inches"
