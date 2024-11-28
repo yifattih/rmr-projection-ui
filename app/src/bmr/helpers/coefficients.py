@@ -1,6 +1,5 @@
-
 coefficients = {
-        'HarrisBenedict': {"male": 
+        'HarrisBenedict': {"men": 
                                 {"imperial":
                                         {"weight": 6.24, "height": 12.7, "age": -6.75, "bias": 66.47}, 
                                 "metric":
@@ -13,7 +12,7 @@ coefficients = {
                         }
                 },
 
-        'Mifflin': {"male": 
+        'Mifflin': {"men": 
                         {"imperial": 
                                 {"weight": 4.536, "height": 15.875, "age": -5, "bias": 5.0},
                         "metric":

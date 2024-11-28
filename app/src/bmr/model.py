@@ -34,6 +34,7 @@ class Builder:
     
          
         try:
+            print("entering calculation")
             self.equations["HarrisBenedict"] = HarrisBenedict(
                 age=self.age,
                 height=self.height,
@@ -42,8 +43,9 @@ class Builder:
                 sex=self.sex,
                 units=self.units,
                 weight_loss_rate=self.weight_loss_rate,
-                energy_deficit=self.energy_deficit,
+                energy_deficit=self.energy_deficit
             )
+            print("entering calculation")
 
             self.equations["Mifflin"] = Mifflin(
                 age=self.age,
@@ -69,9 +71,7 @@ class Builder:
             f"Unknown equation: {equation}"
             f"Valid equations: {self.equations.keys()}"
         )
-        
         self.bmr, self.bmr_deficit = self.equations[equation].get_bmr_and_deficit()
-
     def jasonable_dict(self) -> dict:
         return {
             "age": self.age,

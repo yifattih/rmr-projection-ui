@@ -13,13 +13,13 @@ class HarrisBenedict:
         weight_loss_rate: float = 2,
         energy_deficit: float = 1000,
     ) -> None:
-
         assert 19 <= age <= 150, (
             "Height stop chaning probalbly after 19"
             "and normally people don't live more than "
             "150 year!"
         )
         assert height >= 0, "Height must be positive"
+
         assert time_projection.size != 0, (
             "Time projection is required. "
             "Calculate with the "
@@ -46,7 +46,7 @@ class HarrisBenedict:
         self.energy_deficit = energy_deficit
         self.units = units
         self.sex = sex
-
+        print(coefficients['HarrisBenedict'][self.sex])
         self.coefficients = coefficients['HarrisBenedict'][self.sex][self.units]
         # make sure the coefficients are loaded
         assert self.coefficients != None
@@ -129,7 +129,7 @@ class Mifflin:
             "Units must be on " "imperial or metric" "system"
         )
 
-        assert sex in ['male', 'female'], ('Sex must be male or female')
+        assert sex in ['men', 'female'], ('Sex must be male or female')
 
         if units == "imperial":
             self.height_unit = "inches"

@@ -17,7 +17,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         weight_loss_rate = 2
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -46,7 +46,7 @@ class TestEquationsMifflin(unittest.TestCase):
         units = "imperial"
         weight_loss_rate = 2
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -77,7 +77,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         energy_deficit = 0
         weight_loss_rate = 0.5
-        sex = 'male'
+        sex = 'men'
         units = 'metric'
         with pytest.raises(AssertionError):
             Mifflin(
@@ -99,7 +99,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
         weight_loss_rate = 2
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -120,7 +120,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
         weight_loss_rate = 0.5
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -141,7 +141,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = -1
         energy_deficit = 0
         weight_loss_rate = 0.2
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -162,7 +162,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         energy_deficit = -10
         weight_loss_rate = 0.5
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
                 Mifflin(
                     age=age,
@@ -244,7 +244,7 @@ class TestEquationsMifflin(unittest.TestCase):
         time_projected = np.array([0])
         weight_loss_rate = 2
         units = 'imperial'
-        sex = 'male'
+        sex = 'men'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -273,7 +273,7 @@ class TestEquationsMifflin(unittest.TestCase):
         time_projected = np.array([0])
         weight_loss_rate = 0.5
         units = 'metric'
-        sex = 'male'
+        sex = 'men'
         mifflin = Mifflin(
             age=age,
             height=height,

@@ -12,7 +12,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         weight_initial = 10
         weight_loss_rate = 2
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,
@@ -40,7 +40,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         units = "imperial"
         weight_loss_rate = 2
         energy_deficit = 0
-        sex='male'
+        sex='men'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,
@@ -66,7 +66,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = 10
         energy_deficit = 0
-        sex='male'
+        sex='men'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
@@ -85,7 +85,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
@@ -104,7 +104,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([])
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
@@ -123,7 +123,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = -1
         energy_deficit = 0
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
@@ -142,7 +142,7 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
         time_projected = np.array([1, 2, 3])
         weight_initial = 10
         energy_deficit = -10
-        sex = 'male'
+        sex = 'men'
         with pytest.raises(AssertionError):
             HarrisBenedict(
                 age=age,
@@ -153,12 +153,12 @@ class TestEquationsHarrisBenedict(unittest.TestCase):
                 energy_deficit=energy_deficit,
             )
 
-    def test_male_imperial_return_valid_result(self) -> None:
+    def test_men_imperial_return_valid_result(self) -> None:
         age = 33
         height = 71
         weight_initial = 196
         time_projected = np.array([0])
-        sex = 'male'
+        sex = 'men'
         harris_benedict = HarrisBenedict(
             age=age,
             height=height,

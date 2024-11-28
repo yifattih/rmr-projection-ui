@@ -48,6 +48,7 @@ def submit() -> Response:
         modeller.build()
         modeller.calculate()
         response_data = modeller.jasonable_dict()
+        print(response_data)
         response = {
             "message": "Model Run",
             "status": "Success!",
