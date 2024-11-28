@@ -7,11 +7,11 @@ class TestModel(unittest.TestCase):
             "age": 33,
             "height": 71,
             "weight": 196,
-            "weeks": 0,
+            "time": 0,
             "units": "imperial",
-            "weight_loss_rate": 2,
+            "rate": 2,
             "energy_deficit": 1000,
-            "sex": "men",
+            "sex": "male",
         }
 
         bmr_model = model.Builder(data=data)
@@ -24,12 +24,12 @@ class TestModel(unittest.TestCase):
             "bmr_deficit": [856.0],
             "energy_deficit": 1000,
             "height": 71,
-            "sex": "men",
+            "sex": "male",
             "time_projected": [0],
             "units": "imperial",
-            "weeks": 0,
+            "time": 0,
             "weight": 196,
-            "weight_loss_rate": 2,
+            "rate": 2,
             "weight_proj": [196],
         }
 
@@ -42,11 +42,11 @@ class TestModel(unittest.TestCase):
             "age": 33,
             "height": 71,
             "weight": 196,
-            "weeks": 0,
+            "time": 0,
             "units": "imperial",
-            "weight_loss_rate": 2,
+            "rate": 2,
             "energy_deficit": 1000,
-            "sex": "men",
+            "sex": "male",
         }
 
         bmr_model = model.Builder(data=data)
@@ -59,12 +59,12 @@ class TestModel(unittest.TestCase):
             "bmr_deficit": [968.0],
             "energy_deficit": 1000,
             "height": 71,
-            "sex": "men",
+            "sex": "male",
             "time_projected": [0],
             "units": "imperial",
-            "weeks": 0,
+            "time": 0,
             "weight": 196,
-            "weight_loss_rate": 2,
+            "rate": 2,
             "weight_proj": [196],
         }
 

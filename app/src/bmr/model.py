@@ -34,7 +34,6 @@ class Builder:
     
          
         try:
-            print("entering calculation")
             self.equations["HarrisBenedict"] = HarrisBenedict(
                 age=self.age,
                 height=self.height,
@@ -45,7 +44,6 @@ class Builder:
                 weight_loss_rate=self.weight_loss_rate,
                 energy_deficit=self.energy_deficit
             )
-            print("entering calculation")
 
             self.equations["Mifflin"] = Mifflin(
                 age=self.age,
@@ -77,9 +75,9 @@ class Builder:
             "age": self.age,
             "height": self.height,
             "weight": self.weight,
-            "weeks": self.weeks,
+            "time": self.weeks,
             "units": self.units,
-            "weight_loss_rate": self.weight_loss_rate,
+            "rate": self.weight_loss_rate,
             "energy_deficit": self.energy_deficit,
             "sex": self.sex,
             "time_projected": self.time_proj.tolist(),

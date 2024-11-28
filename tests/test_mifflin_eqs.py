@@ -17,7 +17,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         weight_loss_rate = 2
         energy_deficit = 0
-        sex = 'men'
+        sex = 'male'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -46,7 +46,7 @@ class TestEquationsMifflin(unittest.TestCase):
         units = "imperial"
         weight_loss_rate = 2
         energy_deficit = 0
-        sex = 'men'
+        sex = 'male'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -77,7 +77,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         energy_deficit = 0
         weight_loss_rate = 0.5
-        sex = 'men'
+        sex = 'male'
         units = 'metric'
         with pytest.raises(AssertionError):
             Mifflin(
@@ -99,7 +99,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
         weight_loss_rate = 2
-        sex = 'men'
+        sex = 'male'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -120,7 +120,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = np.array([100, 98, 88])
         energy_deficit = 0
         weight_loss_rate = 0.5
-        sex = 'men'
+        sex = 'male'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -141,7 +141,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = -1
         energy_deficit = 0
         weight_loss_rate = 0.2
-        sex = 'men'
+        sex = 'male'
         with pytest.raises(AssertionError):
             Mifflin(
                 age=age,
@@ -162,7 +162,7 @@ class TestEquationsMifflin(unittest.TestCase):
         weight_initial = 10
         energy_deficit = -10
         weight_loss_rate = 0.5
-        sex = 'men'
+        sex = 'male'
         with pytest.raises(AssertionError):
                 Mifflin(
                     age=age,
@@ -219,7 +219,7 @@ class TestEquationsMifflin(unittest.TestCase):
 ###############################################################################
 ##                   Correct calculation tests                               ##
 ##                                                                           ##
-## For both men and women the following vallus will be tested:               ##
+## For both male and female the following vallus will be tested:               ##
 ## Imperial:                                                                 ##
 ##       initial weight = 196 lb
 ##       height = 71 in
@@ -237,14 +237,14 @@ class TestEquationsMifflin(unittest.TestCase):
 ##       weight loss rate = 0.5
 ###############################################################################
 
-    def test_men_eq_imperial_return_valid_result(self) -> None:
+    def test_male_eq_imperial_return_valid_result(self) -> None:
         age = 33
         height = 71
         weight_initial = 196
         time_projected = np.array([0])
         weight_loss_rate = 2
         units = 'imperial'
-        sex = 'men'
+        sex = 'male'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -266,14 +266,14 @@ class TestEquationsMifflin(unittest.TestCase):
             self.assertEqual(bmr_expected[i], bmr_actual[i])
             self.assertEqual(bmr_deficit_expected[i], bmr_deficit_actual[i])    
 
-    def test_men_eq_metric_return_valid_result(self) -> None:
+    def test_male_eq_metric_return_valid_result(self) -> None:
         age = 33
         height = 180.34
         weight_initial = 88.9
         time_projected = np.array([0])
         weight_loss_rate = 0.5
         units = 'metric'
-        sex = 'men'
+        sex = 'male'
         mifflin = Mifflin(
             age=age,
             height=height,
@@ -296,7 +296,7 @@ class TestEquationsMifflin(unittest.TestCase):
             self.assertEqual(bmr_deficit_expected[i], bmr_deficit_actual[i])
 
 
-    def test_women_eq_imperial_return_valid_result(self) -> None:
+    def test_female_eq_imperial_return_valid_result(self) -> None:
         age = 33
         height = 71
         weight_initial = 196
@@ -326,7 +326,7 @@ class TestEquationsMifflin(unittest.TestCase):
             self.assertEqual(bmr_expected[i], bmr_actual[i])
             self.assertEqual(bmr_deficit_expected[i], bmr_deficit_actual[i])    
 
-    def test_women_eq_metric_return_valid_result(self) -> None:
+    def test_female_eq_metric_return_valid_result(self) -> None:
         age = 33
         height = 180.34
         weight_initial = 88.9
