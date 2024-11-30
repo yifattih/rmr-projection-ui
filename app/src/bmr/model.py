@@ -1,8 +1,8 @@
 import numpy as np
 from typing import TypeAlias
-from app.src.bmr.helpers import time_projection as time_proj
-from app.src.bmr.helpers import weight_projection as weight_proj
-from app.src.bmr.helpers.equations import HarrisBenedict, Mifflin
+from bmr.helpers import time_projection as time_proj
+from bmr.helpers import weight_projection as weight_proj
+from bmr.helpers.equations import HarrisBenedict, Mifflin
 
 JSONType: TypeAlias = dict[str, str | None]
 

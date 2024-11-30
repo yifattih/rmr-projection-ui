@@ -1,5 +1,5 @@
 import numpy as np
-from app.src.bmr.helpers.coefficients import coefficients
+from bmr.helpers.coefficients_old import coefficients
 
 class HarrisBenedict:
     def __init__(
