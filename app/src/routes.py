@@ -1,6 +1,7 @@
+import os
+import requests
 from typing import TypeAlias
 from flask import Flask, Response, render_template, request, jsonify
-from bmr import model
 
 app = Flask(__name__)
 
@@ -10,18 +11,7 @@ number: TypeAlias = int | float
 
 # To hold the data for the table on buffer
 response_data = []
-
-
-def process_form_data(data: JSONType) -> dict[str, str | number]:
-    processed_data = {"sex": data["sex"],
-                      "units": data["units"],
-                      "age": float(data["age"]),
-                      "weight": float(data["weight"]),
-                      "height": float(data["height"]),
-                      "rate": float(data["rate"]),
-                      "time": int(data["time"])
-                      }
-    return processed_data
+api_url = os.environ.get("API_URL")
 
 
 @app.route("/")
@@ -34,50 +24,26 @@ def home() -> str:
 
 @app.route("/submit", methods=["POST"])
 def submit() -> Response:
-    # data = request.form
-    # response = {"message": "Data received successfully!",
-    #             "data": data}
-    # return jsonify(response)
     """
     Route to handle form data
 
     :return: Input and output data
     :rtype: JSON
     """
-    form_data = request.form  # Get data from POST request
+    # form_data = request.form  # Get data from POST request
+    form_data = {"sex": request.form.get('sex'),
+                 "units": request.form.get('units'),
+                 "age": request.form.get('age'),
+                 "weight": request.form.get('weight'),
+                 "height": request.form.get('height'),
+                 "weight_loss_rate": request.form.get('weight_loss_rate'),
+                 "duration": request.form.get('duration')}
     try:
-        processed_data = process_form_data(data=form_data)  # type: ignore
-        # Calculate output from model
-        modeller = model.Builder(data=processed_data)  # type: ignore
-        modeller.build()
-        modeller.calculate()
-        response_data = modeller.jasonable_dict()
-        response = {
-            "message": "Model Run",
-            "status": "Success!",
-            "data": response_data,
-        }
+        response = requests.post(api_url, json=form_data) # type: ignore
     except Exception:
         response = {
             "message": "Model Run",
             "status": "Failed!",
             "data": [],
         }
-    return jsonify(response)
-
-
-@app.route("/clear", methods=["POST"])
-def clear() -> Response:
-    """
-    Main function to handle AJAX POST requests to clear form fields and plots.
-
-    :return: Empty data
-    :rtype: JSON
-    """
-    response_data.clear()
-    response = {
-        "message": "Data Clearing",
-        "status": "Success!",
-        "data_out": response_data,
-    }
-    return jsonify(response)
+    return jsonify(response.content)

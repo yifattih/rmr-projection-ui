@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Varibale to store directory name
-DIR_TO_CHANGE=/workspaces/bmr_calculator
+DIR_TO_CHANGE=/workspaces/rmr-projection-client-browser
 
 
 # Move one dir up
