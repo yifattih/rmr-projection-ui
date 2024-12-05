@@ -17,4 +17,5 @@ services:
       - ../..:/workspaces:cached         # Mount source code for hot-reloading if desired
     network_mode: service:devcontainer   # Puts app and devcontainer in the same network
     environment:
+      - PORT=5000
       - API_URL="https://api-alpha-577926260607.us-central1.run.app/rmr/"
