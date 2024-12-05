@@ -2,8 +2,9 @@ requests
 numpy
 Flask
 pytest
-bs4
 pytest-cov
+pytest-mock
+bs4
 flake8
 black
 coverage

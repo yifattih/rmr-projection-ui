@@ -1,27 +1,37 @@
 # app/Dockerfile
 FROM python:3.11-slim
 
-# Install updates
-RUN apt-get update && apt-get upgrade -y && apt-get install -y
+# Install updates and create user
+RUN apt-get autoremove \
+    && groupadd -f -r yifattih \
+    && useradd -r -g yifattih -m -d /home/yifattih -s /bin/bash yifattih
+
 
 # Set the working directory for the app
 WORKDIR /app
 
-# Update pip
-RUN pip install --upgrade pip
+# Set ownership permissions to working directory
+RUN chown -R yifattih:yifattih /app
+
+# Change user
+USER yifattih 
 
 # Copy app-specific requirements and install them
 COPY requirements.txt /app/
-RUN pip install --no-cache-dir -r requirements.txt
+
+# Update pip and and install requirements
+RUN pip install --user --upgrade pip \
+    && pip install --user --no-cache-dir -r requirements.txt
+
+# Add the user's local bin directory to PATH
+ENV PATH="/home/yifattih/.local/bin:$PATH"
 
 # Copy the app code into the container
 COPY src/ /app/src/
 
-# Create port environment variable
+# Set application required env variables
+ENV PORT=5000
 ENV API_URL="https://api-alpha-577926260607.us-central1.run.app/rmr/"
 
-# Expose the application port
-EXPOSE 5000
-
 # Command to run the app (e.g., a Flask app)
-CMD ["python", "src/wsgi.py"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app.src.wsgi:app"]
