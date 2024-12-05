@@ -1,16 +1,11 @@
 import os
+import json
 import requests
-from typing import TypeAlias
 from flask import Flask, Response, render_template, request, jsonify
 
 app = Flask(__name__)
 
-JSONType: TypeAlias = dict[str, str | None]
-number: TypeAlias = int | float
-
-
-# To hold the data for the table on buffer
-response_data = []
+# Get API url from environent variable
 api_url = os.environ.get("API_URL")
 
 
@@ -30,7 +25,6 @@ def submit() -> Response:
     :return: Input and output data
     :rtype: JSON
     """
-    # form_data = request.form  # Get data from POST request
     form_data = {"sex": request.form.get('sex'),
                  "units": request.form.get('units'),
                  "age": request.form.get('age'),
@@ -39,11 +33,12 @@ def submit() -> Response:
                  "weight_loss_rate": request.form.get('weight_loss_rate'),
                  "duration": request.form.get('duration')}
     try:
-        response = requests.post(api_url, json=form_data) # type: ignore
+        response = requests.post(api_url, json=form_data)  # type: ignore
+        # Decoding response: bytes object -> str object
+        #                    8-bit code units object -> string object
+        response_bytes = response.content
+        response_str = response_bytes.decode("utf-8")
+        response = json.loads(response_str)
     except Exception:
-        response = {
-            "message": "Model Run",
-            "status": "Failed!",
-            "data": [],
-        }
-    return jsonify(response.content)
+        response = {"message": "An error occured!"}
+    return jsonify(response)  # type: ignore

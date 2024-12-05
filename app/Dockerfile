@@ -18,7 +18,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY src/ /app/src/
 
 # Create port environment variable
-ENV FLASK_RUN_PORT=5000
+ENV API_URL = "https://api-alpha-577926260607.us-central1.run.app/rmr/"
 
 # Expose the application port
 EXPOSE 5000

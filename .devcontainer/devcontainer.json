@@ -23,7 +23,7 @@
 		}
 	},
 	
-	"postStartCommand": "bash /workspaces/bmr_calculator/.devcontainer/ownerships.sh"
+	"postStartCommand": "bash /workspaces/rmr-projection-client-browser/.devcontainer/ownerships.sh"
 
 
 	// Configure tool-specific properties.
