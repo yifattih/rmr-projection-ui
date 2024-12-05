@@ -34,4 +34,4 @@ COPY src/ /app/src/
 # ENV API_URL="https://api-alpha-577926260607.us-central1.run.app/rmr/"
 
 # Command to run the app (e.g., a Flask app)
-CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "app.src.wsgi:app"]
+CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.wsgi:app"]
