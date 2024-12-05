@@ -30,8 +30,8 @@ ENV PATH="/home/yifattih/.local/bin:$PATH"
 COPY src/ /app/src/
 
 # Set application required env variables
-ENV PORT=5000
-ENV API_URL="https://api-alpha-577926260607.us-central1.run.app/rmr/"
+# ENV PORT=5000
+# ENV API_URL="https://api-alpha-577926260607.us-central1.run.app/rmr/"
 
 # Command to run the app (e.g., a Flask app)
 CMD ["gunicorn", "-w", "4", "-b", "0.0.0.0:5000", "src.wsgi:app"]
