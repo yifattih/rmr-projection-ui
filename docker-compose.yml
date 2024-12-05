@@ -1,5 +1,6 @@
 services:
   devcontainer:
+    container_name: development-service
     build: 
       context: .devcontainer
       dockerfile: Dockerfile
@@ -10,6 +11,7 @@ services:
       - "5000:5000"
 
   app:
+    container_name: app-service
     build:
       context: app
       dockerfile: Dockerfile
