@@ -103,7 +103,7 @@ function senddata(sex, units) {
         data: form_data,
         success: function(response) {
             console.log("Server response:");
-            console.log(response.output.rmr);
+            console.log(response.output.rnr);
             $(".plots-text").text(response.output.rmr)
             
             let chartStatus = Chart.getChart("myChart"); // <canvas> id
