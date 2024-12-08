@@ -8,7 +8,7 @@ services:
       - ../..:/workspaces:cached      
     command: sleep infinity
     ports:
-      - "5000:5000"
+      - "4000:4000"
 
   app:
     container_name: webapp-service
@@ -19,5 +19,5 @@ services:
       - ../..:/workspaces:cached         # Mount source code for hot-reloading if desired
     network_mode: service:devcontainer   # Puts app and devcontainer in the same network
     environment:
-      - PORT: 5000
-      - API_URL: "https://api-alpha-577926260607.us-central1.run.app/rmr/"
+      - PORT=4000
+      - API_URL=https://api-alpha-577926260607.us-central1.run.app/rmr/
