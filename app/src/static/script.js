@@ -138,8 +138,15 @@ function sendData(sex, units) {
         type: "POST",
         data: formData,
         success: function (response) {
-            console.log(Math.floor(response.output.rmr[0]))
             renderChart(response.output.time_projection, response.output.rmr);  // Render the RMR chart
+            let sedentaryValue = Math.round(response.output.rmr.sedentary[0]);
+            $(".sedentary-value").text(sedentaryValue + " cal/day");
+            let lowActiveValue = Math.round(response.output.rmr.low_active[0]);
+            $(".low-active-value").text(lowActiveValue + " cal/day");
+            let activeValue = Math.round(response.output.rmr.active[0]);
+            $(".active-value").text(activeValue + " cal/day");
+            let veryActiveValue = Math.round(response.output.rmr.very_active[0]);
+            $(".very-active-value").text(veryActiveValue + " cal/day");
         },
     });
 }
@@ -167,7 +174,22 @@ function renderChart(labels, data) {
             datasets: [
                 {
                     label: "Sedentary",
-                    data: data,  // Set y-axis data (RMR values)
+                    data: data.sedentary,  // Set y-axis data (RMR values)
+                    borderWidth: 1,
+                },
+                {
+                    label: "Low Active",
+                    data: data.low_active,  // Set y-axis data (RMR values)
+                    borderWidth: 1,
+                },
+                {
+                    label: "Active",
+                    data: data.active,  // Set y-axis data (RMR values)
+                    borderWidth: 1,
+                },
+                {
+                    label: "Very Active",
+                    data: data.very_active,  // Set y-axis data (RMR values)
                     borderWidth: 1,
                 },
             ],
@@ -179,15 +201,73 @@ function renderChart(labels, data) {
                     title: {
                         display: true,
                         text: "Weeks",  // X-axis title
+                        font: {
+                            weight: "bold"
+                        }
                     },
+                    grid: {
+                        display: true,
+                        tickLength: 4
+                    },
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0,
+                        font: {
+                            size: 12,
+                            weight: "number"
+                        }
+                    },
+                    border: {
+                        display: true,
+                        width: 3
+                    }
                 },
                 y: {
                     title: {
                         display: true,
                         text: "RMR (calories/day)",  // Y-axis title
+                        font: {
+                            weight: "bold"
+                        }
                     },
+                    grid: {
+                        display: true,
+                        tickLength: 4
+                    },
+                    ticks: {
+                        maxRotation: 0,
+                        minRotation: 0,
+                        font: {
+                            size: 12,
+                            weight: "number"
+                        }
+                    },
+                    border: {
+                        display: true,
+                        width: 3
+                    }
                 },
             },
+            plugins: {
+                legend: {
+                    align: "center",
+                    position: "bottom",
+                    labels: {
+                        boxWidth: 4,
+                        font: {
+                            size: 10,
+                        }
+                    }
+                }
+            },
+            elements: {
+                point: {
+                    radius: 2
+                },
+                line: {
+                    borderWidth: 5
+                }
+            }
         },
     });
 }
