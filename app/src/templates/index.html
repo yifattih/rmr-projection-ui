@@ -4,312 +4,179 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
-        <title>Basal Metabolic Rate Projector</title>
+        <title>RMR Projector</title>
     </head>
     <body>
-        <header>
-            <h1>Basal Metabolic Rate Projector</h1>
-        </header>
-        <main>
-            <aside>
-                <form>
-                    <section class="toggles-container">
-                        <div class="units-container">
-                            <div class="tooltip">
-                                <span class="tooltiptext age">
-                                    <p class="tooltip-content">System of units?</p>
-                                </span>
+        <div class="main-container">
+            <header>
+                <h1>Resting Metabolic Rate Projector</h1>
+            </header>
+            <main>
+                <aside>
+                    <form>
+                        <section class="toggles">
+                            <div class="toggle-container">
+                                <div class="tooltip">
+                                    <span class="tooltip-text">Select system of units:</span>
+                                </div>
+                                <div class="toggle">
+                                    <input class="checkbox-units" type="checkbox" id="checkbox-units" name="checkbox-units">
+                                    <label for="checkbox-units">
+                                        <div class="action">
+                                            <span class="option-1">US Units</span>
+                                            <span class="option-2">Metric Units</span>     
+                                        </div>
+                                    </label>
+                                </div>
                             </div>
-                            <label class="switch">
-                                <input class="checkbox-units" type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                        </div>
-                        <div class="sex-container">
-                            <div class="tooltip">
-                                <span class="tooltiptext age">
-                                    <p class="tooltip-content">Sex at birth?</p>
-                                </span>
-                            </div>
-                            <span>
-                                <i class="fa-solid fa-venus"></i>
-                            </span>
-                            <label class="switch">
-                                <input class="checkbox-sex" type="checkbox">
-                                <span class="slider"></span>
-                            </label>
-                            <span>
-                                <i class="fa-solid fa-mars"></i>
-                            </span>
-                        </div>
-                    </section>
-                    <section class="form-section range">
-                        <label class="label" for="age-slider">
-                            <div class="tooltip">
-                                <span class="tooltiptext age">
-                                    <p class="tooltip-content">Current weight?</p>
-                                </span>
-                            </div>
-                            Age
-                        </label>
-                        <output class= "level-value" id="ageout">50</output>
-                        <label class="unit" for="age-slider">years</label>
-                        <input class="level age" type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" name="age">
-                    </section>
-                    <section class="form-section range">
-                        <label class="label" for="weight-slider">
-                            <div class="tooltip">
-                                <span class="tooltiptext weight">
-                                    <p class="tooltip-content">Current weight?</p>
-                                </span>
-                            </div>
-                            Weight
-                        </label>
-                        <output class= "level-value weight" id="weightout">100</output>
-                        <label class="unit weight" for="weight-slider">lbs</label>
-                        <input class="level weight" type="range" min="50" max="999" value="100" oninput="weightout.value = this.value" name="weight">
-                    </section>
-                    <section class="form-section range">
-                        <label class="label" for="height-slider">
-                            <div class="tooltip">
-                                <span class="tooltiptext height">
-                                    <p class="tooltip-content">Current height?</p>
-                                </span>
-                            </div>
-                            Height
-                        </label>
-                        <output class= "level-value height" id="heightout">85</output>
-                        <label class="unit height" for="height-slider">inch</label>
-                        <input class="level height" type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" name="height">
-                    </section>
-                    <section class="form-section range">
-                        <label class="label" for="rate-slider">
-                            <div class="tooltip">
-                                <span class="tooltiptext wlr">
-                                    <p class="tooltip-content">Weekly weight loss goal?</p>
-                                </span>
-                            </div>
-                            WLR
-                        </label>
-                        <output class= "level-value rate" id="rateout">2</output>
-                        <label class="unit rate" for="rate-slider">lbs</label>
-                        <input class="level rate" type="range" min="0" max="20" step="1" value="2" oninput="rateout.value = this.value" name="weight_loss_rate">
-                    </section>
-                    <section class="form-section range">
-                        <label class="label" for="time-slider">
-                            <div class="tooltip">
-                                <span class="tooltiptext time">
-                                    <p class="tooltip-content">How many weels to project?</p>
-                                </span>
-                            </div>
-                            Time
-                        </label>
-                        <output class= "level-value" id="timeout">24</output>
-                        <label class="unit" for="time-slider">weeks</label>
-                        <input class="level time" type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" name="duration">
-                    </section>
-                </form>
-            </aside>
-            <section>
-                <!-- <h2>Basal Metabolic Rate by Activity Factor</h2> -->
-                <article class="activity-factor">
-                    <div class="container">
-                        <div class="card">
-                            <div class="content-box">
-                                <div class="card-body">
-                                    <span class="card-title">
-                                        Sedentary
-                                    </span>
-                                    <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
+                            <div class="toggle-container">
+                                <div class="tooltip">
+                                    <span class="tooltip-text">Select sex at birth:</span>
+                                </div>
+                                <div class="toggle">
+                                    <input class="checkbox-sex" type="checkbox" id="checkbox-sex" name="checkbox-sex">
+                                    <label for="checkbox-sex">
+                                        <div class="action">
+                                            <span class="option-1">
+                                                <i class="fa-solid fa-venus"></i>
+                                                <span>Female</span>
+                                            </span>
+                                            <span class="option-2">
+                                                <i class="fa-solid fa-mars"></i>
+                                                <span>Male</span>
                                             </span>
                                         </div>
-                                        Day-to-day activity
-                                    </a>
+                                    </label>
                                 </div>
-                                <div class="value-box">
-                                    <span>
-                                        <span>
-                                            <div class="tooltip">
-                                                <span class="tooltiptext">
-                                                    <p class="tooltip-content">Activity Factor</p>
-                                                    <p class="tooltip-content">Males = 1.00</p>
-                                                    <p class="tooltip-content">Females = 1.00</p>
-                                                </span>
-                                            </div>
-                                            <i class="fa-solid fa-heart"></i>
-                                        </span>
-                                    </span>
-                                    <p id="bmr-value">
-                                        10000 cal
-                                    </p>
-                                </div>
+                            </div>
+                        </section>
+                        <section class="ranges">
+                            <div class="range">
+                                <label class="title" for="age-slider">Age</label>
+                                <output class= "level-value" id="ageout">50</output>
+                                <label class="unit" for="age-slider">years</label>
+                                <input class="level age" type="range" min="20" max="150" value="50" oninput="ageout.value = this.value" name="age">
+                            </div>
+                            <div class="range">
+                                <label class="title" for="weight-slider">Weight</label>
+                                <output class= "level-value weight" id="weightout">200</output>
+                                <label class="unit weight" for="weight-slider">lbs</label>
+                                <input class="level weight" type="range" min="100" max="450" value="200" oninput="weightout.value = this.value" name="weight">
+                            </div>
+                            <div class="range">
+                                <label class="title" for="height-slider">Height</label>
+                                <output class= "level-value height" id="heightout">85</output>
+                                <label class="unit height" for="height-slider">inch</label>
+                                <input class="level height" type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" name="height">
+                            </div>
+                            <div class="range">
+                                <label class="title" for="rate-slider">Weight Loss Goal</label>
+                                <output class= "level-value rate" id="rateout">2</output>
+                                <label class="unit rate" for="rate-slider">lbs</label>
+                                <input class="level rate" type="range" min="0" max="20" step="1" value="2" oninput="rateout.value = this.value" name="weight_loss_rate">
+                            </div>
+                            <div class="range">
+                                <label class="title" for="time-slider">Duration</label>
+                                <output class= "level-value" id="timeout">24</output>
+                                <label class="unit" for="time-slider">weeks</label>
+                                <input class="level time" type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" name="duration">
+                            </div>
+                        </section>
+                    </form>
+                </aside>
+                <section>
+                    <article class="activity-factor">
+                        <h2>Current RMR by Activity Factor</h2>
+                        <div class="activity-factor-container">
+                            <div class="container-body">
+                                <span class="container-title">Sedentary</span>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Day-to-day activity
+                                </a>
+                            </div>
+                            <div class="container-value-box">
+                                <i class="fa-solid fa-heart"></i>
+                                <span class="activity-factor-value">10000 cal</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="card">
-                            <div class="content-box">
-                                <div class="card-body">
-                                    <span class="card-title">
-                                        Low Active
-                                    </span>
-                                    <a class="card-content first-line" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        <span class="emoji">
-                                            <i class="fa-solid fa-person-walking"></i>
-                                        </span> 
-                                        <span class="low-active-text">1.5–3 m at 3–4 mph</span>
-                                    </a>
-                                    <a class="card-content second-line" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext second-line">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        Day-to-day activity
-                                    </a>
-                                </div>
-                                <div class="value-box">
-                                    <span>
-                                        <span>
-                                            <div class="tooltip">
-                                                <span class="tooltiptext">
-                                                    <p class="tooltip-content">Activity Factor</p>
-                                                    <p class="tooltip-content">Males = 1.11</p>
-                                                    <p class="tooltip-content">Females = 1.12</p>
-                                                </span>
-                                            </div>
-                                            <i class="fa-solid fa-heart-pulse"></i>
-                                        </span>
-                                    </span>
-                                    <p id="bmr-value">
-                                        10000 cal
-                                    </p>
-                                </div>
+                        <div class="activity-factor-container">
+                            <div class="container-body">
+                                <span class="container-title">Low Active</span>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <i class="fa-solid fa-person-walking"></i>
+                                    <span class="low-active-text">1.5–3 m at 3–4 mph</span>
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Day-to-day activity
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor | Males = 1.11 | Females = 1.12
+                                </a>
+                            </div>
+                            <div class="container-value-box">
+                                <i class="fa-solid fa-heart-pulse"></i>
+                                <span class="activity-factor-value">10000 cal</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="card">
-                            <div class="content-box">
-                                <div class="card-body">
-                                    <span class="card-title">
-                                        Active
-                                    </span>
-                                    <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        <span class="emoji">
-                                            <i class="fa-solid fa-person-walking"></i>
-                                        </span> 
-                                        <span class="active-text">3+ m at 3–4 mph</span>
-                                    </a>
-                                    <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        60+ m brisk activity
-                                    </a>
-                                </div>
-                                <div class="value-box">
-                                    <span>
-                                        <span>
-                                            <div class="tooltip">
-                                                <span class="tooltiptext">
-                                                    <p class="tooltip-content">Activity Factor</p>
-                                                    <p class="tooltip-content">Males = 1.25</p>
-                                                    <p class="tooltip-content">Females = 1.27</p>
-                                                </span>
-                                            </div>
-                                            <i class="fa-solid fa-heart-circle-exclamation"></i>
-                                        </span>
-                                    </span>
-                                    <p id="bmr-value">
-                                        10000 cal
-                                    </p>
-                                </div>
+                        <div class="activity-factor-container">
+                            <div class="container-body">
+                                <span class="container-title">Active</span>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <i class="fa-solid fa-person-walking"></i>
+                                    <span class="active-text">3+ m at 3–4 mph</span>
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    60+ mins brisk activity
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor | Males = 1.25 | Females = 1.27
+                                </a>
+                            </div>
+                            <div class="container-value-box">
+                                <i class="fa-solid fa-heart-circle-exclamation"></i>
+                                <span class="activity-factor-value">10000 cal</span>
                             </div>
                         </div>
-                    </div>
-                    <div class="container">
-                        <div class="card">
-                            <div class="content-box">
-                                <div class="card-body">
-                                    <span class="card-title">
-                                        Very Active
-                                    </span>
-                                    <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        <span class="emoji">
-                                            <i class="fa-solid fa-person-walking"></i>
-                                        </span> 
-                                        <span class="very-active-text">7.5+ m at 3–4 mph</span>
-                                    </a>
-                                    <a class="card-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                        <div class="tooltip">
-                                            <span class="tooltiptext">
-                                                <p class="tooltip-content">Click!</p>
-                                            </span>
-                                        </div>
-                                        60+ m vigorous activity
-                                    </a>
-                                </div>
-                                <div class="value-box">
-                                    <span>
-                                        <span>
-                                            <div class="tooltip">
-                                                <span class="tooltiptext">
-                                                    <p class="tooltip-content">Activity Factor</p>
-                                                    <p class="tooltip-content">Males = 1.48</p>
-                                                    <p class="tooltip-content">Females = 1.45</p>
-                                                </span>
-                                            </div>
-                                            <i class="fa-solid fa-heart-circle-bolt"></i>
-                                        </span>
-                                    </span>
-                                    <p id="bmr-value">
-                                        10000 cal
-                                    </p>
-                                </div>
+                        <div class="activity-factor-container">
+                            <div class="container-body">
+                                <span class="container-title">Very Active</span>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    <i class="fa-solid fa-person-walking"></i>
+                                    <span class="very-active-text">7.5+ m at 3–4 mph</span>
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    60+ mins vigorous activity
+                                </a>
+                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor | Males = 1.48 | Females = 1.45
+                                </a>
+                            </div>
+                            <div class="container-value-box">
+                                <i class="fa-solid fa-heart-circle-bolt"></i>
+                                <span class="activity-factor-value">10000 cal</span>
                             </div>
                         </div>
-                    </div>
-                </article>
-                <article class="plots">
-                    <h2>Plots</h2>
-                    <div class="chart-container">
-                        <canvas id="myChart" width="400" height="200"></canvas>
-                    </div>
-                </article>
-            </section>
-        </main>
-        <footer>
-            <strong>Disclaimer:</strong> The information provided in this material is for 
-            educational purposes only and should not be considered professional 
-            or expert advice. While every effort has been made to ensure the 
-            accuracy of the information, it may not reflect the most current 
-            research or practices. Users are encouraged to consult with qualified 
-            professionals for specific guidance related to their individual 
-            circumstances. The creators of this material assume no responsibility 
-            for any errors or omissions, or for any outcomes resulting from the 
-            use of this information.
-        </footer>
+                    </article>
+                    <article class="plots">
+                        <h2>RMR Projections</h2>
+                        <div class="chart-container">
+                            <canvas id="chartContext"></canvas>
+                        </div>
+                    </article>
+                </section>
+            </main>
+            <footer>
+                <strong>Disclaimer:</strong> The information provided in this material is for 
+                educational purposes only and should not be considered professional 
+                or expert advice. While every effort has been made to ensure the 
+                accuracy of the information, it may not reflect the most current 
+                research or practices. Users are encouraged to consult with qualified 
+                professionals for specific guidance related to their individual 
+                circumstances. The creators of this material assume no responsibility 
+                for any errors or omissions, or for any outcomes resulting from the 
+                use of this information.
+            </footer>
+        </div>
         <script src="https://kit.fontawesome.com/42dc2bc760.js" crossorigin="anonymous"></script>
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script> -->
