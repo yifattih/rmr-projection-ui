@@ -1,6 +1,7 @@
 requests
 numpy
 Flask
+gunicorn
 pytest
 pytest-cov
 pytest-mock
