@@ -138,6 +138,7 @@ function sendData(sex, units) {
         type: "POST",
         data: formData,
         success: function (response) {
+            console.log(Math.floor(response.output.rmr[0]))
             renderChart(response.output.time_projection, response.output.rmr);  // Render the RMR chart
         },
     });

@@ -350,6 +350,7 @@ section.toggles input:checked + label .action span.option-2 {
   align-items: center;
   border-bottom: var(--width-xsmall) solid var(--border-color);
   padding-bottom: var(--padding-small);
+  gap: var(--gap-small);
 }
 
 .activity-factor-container .container-body {
