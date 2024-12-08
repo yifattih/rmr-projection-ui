@@ -5,7 +5,10 @@ services:
       context: .devcontainer
       dockerfile: Dockerfile
     volumes:
-      - ../..:/workspaces:cached      
+      - ../..:/workspaces:cached     
+    environment:
+      - PORT=4000
+      - API_URL=https://api-alpha-577926260607.us-central1.run.app/rmr/
     command: sleep infinity
     ports:
       - "4000:4000"

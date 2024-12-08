@@ -139,6 +139,8 @@ function sendData(sex, units) {
         data: formData,
         success: function (response) {
             renderChart(response.output.time_projection, response.output.rmr);  // Render the RMR chart
+            
+            // Update Activity Factor cards RMR values
             let sedentaryValue = Math.round(response.output.rmr.sedentary[0]);
             $(".sedentary-value").text(sedentaryValue + " cal/day");
             let lowActiveValue = Math.round(response.output.rmr.low_active[0]);
