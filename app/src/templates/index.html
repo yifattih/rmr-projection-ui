@@ -4,6 +4,11 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+        <script src="https://kit.fontawesome.com/42dc2bc760.js" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+        <script src="{{ url_for('static', filename='script.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         <title>RMR Projector</title>
     </head>
     <body>
@@ -12,6 +17,22 @@
                 <h1>Resting Metabolic Rate Projector</h1>
             </header>
             <main>
+                <section class="about">
+                    <h3>Resting Metabolic Rate (RMR)</h3> 
+                    <span>
+                        RMR represents the number of calories your body needs to
+                        perform essential functions, like breathing and maintaining
+                        body temperature, while at rest.
+                        It serves as the baseline for estimating daily energy
+                        requirements and varies based on age, weight, height, sex,
+                        and body composition.
+                    </span>
+                    <span>
+                        This web app provides a weekly projection of the
+                        estimated RMR, tailored to your weight loss goal per
+                        week and the total duration in weeks.
+                    </span>
+                </section>
                 <aside>
                     <form>
                         <section class="toggles">
@@ -84,7 +105,7 @@
                         </section>
                     </form>
                 </aside>
-                <section>
+                <section class="main-content">
                     <article class="activity-factor">
                         <h2>Current RMR by Activity Factor</h2>
                         <div class="activity-factor-container">
@@ -96,7 +117,7 @@
                             </div>
                             <div class="container-value-box">
                                 <i class="fa-solid fa-heart"></i>
-                                <span class="sedentary-value">10000 cal</span>
+                                <span class="sedentary-value"></span>
                             </div>
                         </div>
                         <div class="activity-factor-container">
@@ -115,7 +136,7 @@
                             </div>
                             <div class="container-value-box">
                                 <i class="fa-solid fa-heart-pulse"></i>
-                                <span class="low-active-value">10000 cal</span>
+                                <span class="low-active-value"></span>
                             </div>
                         </div>
                         <div class="activity-factor-container">
@@ -134,7 +155,7 @@
                             </div>
                             <div class="container-value-box">
                                 <i class="fa-solid fa-heart-circle-exclamation"></i>
-                                <span class="active-value">10000 cal</span>
+                                <span class="active-value"></span>
                             </div>
                         </div>
                         <div class="activity-factor-container">
@@ -153,12 +174,12 @@
                             </div>
                             <div class="container-value-box">
                                 <i class="fa-solid fa-heart-circle-bolt"></i>
-                                <span class="very-active-value">10000 cal</span>
+                                <span class="very-active-value"></span>
                             </div>
                         </div>
                     </article>
-                    <article class="plots">
-                        <h2>RMR Projections</h2>
+                    <article class="plot">
+                        <h2>Weekly RMR Projections</h2>
                         <div class="chart-container">
                             <canvas id="chartContext"></canvas>
                         </div>
@@ -166,21 +187,16 @@
                 </section>
             </main>
             <footer>
-                <strong>Disclaimer:</strong> The information provided in this material is for 
+                <strong>Disclaimer:</strong>
+                The information provided in this material is for 
                 educational purposes only and should not be considered professional 
                 or expert advice. While every effort has been made to ensure the 
                 accuracy of the information, it may not reflect the most current 
                 research or practices. Users are encouraged to consult with qualified 
                 professionals for specific guidance related to their individual 
-                circumstances. The creators of this material assume no responsibility 
-                for any errors or omissions, or for any outcomes resulting from the 
-                use of this information.
+                circumstances.
+                <a href="https://www.flaticon.com/free-icons/graph" title="graph icons">Graph icons created by ibobicon - Flaticon</a>
             </footer>
         </div>
-        <script src="https://kit.fontawesome.com/42dc2bc760.js" crossorigin="anonymous"></script>
-        <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.5/jquery.validate.js"></script> -->
-        <script src="{{ url_for('static', filename='script.js') }}"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     </body>
 </html>

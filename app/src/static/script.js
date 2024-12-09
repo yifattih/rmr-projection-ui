@@ -141,14 +141,14 @@ function sendData(sex, units) {
             renderChart(response.output.time_projection, response.output.rmr);  // Render the RMR chart
             
             // Update Activity Factor cards RMR values
-            let sedentaryValue = Math.round(response.output.rmr.sedentary[0]);
-            $(".sedentary-value").text(sedentaryValue + " cal/day");
-            let lowActiveValue = Math.round(response.output.rmr.low_active[0]);
-            $(".low-active-value").text(lowActiveValue + " cal/day");
-            let activeValue = Math.round(response.output.rmr.active[0]);
-            $(".active-value").text(activeValue + " cal/day");
-            let veryActiveValue = Math.round(response.output.rmr.very_active[0]);
-            $(".very-active-value").text(veryActiveValue + " cal/day");
+            let sedentaryValue = Math.round(response.output.rmr.sedentary[0]).toLocaleString();
+            $(".sedentary-value").text(sedentaryValue + " cals/day");
+            let lowActiveValue = Math.round(response.output.rmr.low_active[0]).toLocaleString();
+            $(".low-active-value").text(lowActiveValue + " cals/day");
+            let activeValue = Math.round(response.output.rmr.active[0]).toLocaleString();
+            $(".active-value").text(activeValue + " cals/day");
+            let veryActiveValue = Math.round(response.output.rmr.very_active[0]).toLocaleString();
+            $(".very-active-value").text(veryActiveValue + " cals/day");
         },
     });
 }
@@ -176,23 +176,27 @@ function renderChart(labels, data) {
             datasets: [
                 {
                     label: "Sedentary",
-                    data: data.sedentary,  // Set y-axis data (RMR values)
+                    data: data.sedentary.map(Math.round),  // Set y-axis data (RMR values)
                     borderWidth: 1,
+                    borderColor: "#D7DADC",
                 },
                 {
                     label: "Low Active",
-                    data: data.low_active,  // Set y-axis data (RMR values)
+                    data: data.low_active.map(Math.round),  // Set y-axis data (RMR values)
                     borderWidth: 1,
+                    borderColor: "#AFB5B9",
                 },
                 {
                     label: "Active",
-                    data: data.active,  // Set y-axis data (RMR values)
+                    data: data.active.map(Math.round),  // Set y-axis data (RMR values)
                     borderWidth: 1,
+                    borderColor: "#879195",
                 },
                 {
                     label: "Very Active",
-                    data: data.very_active,  // Set y-axis data (RMR values)
+                    data: data.very_active.map(Math.round),  // Set y-axis data (RMR values)
                     borderWidth: 1,
+                    borderColor: "#5F6C72",
                 },
             ],
         },
@@ -202,10 +206,11 @@ function renderChart(labels, data) {
                     beginAtZero: true,
                     title: {
                         display: true,
-                        text: "Weeks",  // X-axis title
+                        color: "#37474F",
+                        text: "Week",  // X-axis title
                         font: {
-                            weight: "bold"
-                        }
+                            weight: "bold",
+                        },
                     },
                     grid: {
                         display: true,
@@ -216,21 +221,22 @@ function renderChart(labels, data) {
                         minRotation: 0,
                         font: {
                             size: 12,
-                            weight: "number"
-                        }
+                            weight: "number",
+                        },
                     },
                     border: {
                         display: true,
-                        width: 3
-                    }
+                        width: 3,
+                    },
                 },
                 y: {
                     title: {
                         display: true,
-                        text: "RMR (calories/day)",  // Y-axis title
+                        color: "#37474F",
+                        text: "RMR (cals/day)",  // Y-axis title
                         font: {
-                            weight: "bold"
-                        }
+                            weight: "bold",
+                        },
                     },
                     grid: {
                         display: true,
@@ -241,13 +247,13 @@ function renderChart(labels, data) {
                         minRotation: 0,
                         font: {
                             size: 12,
-                            weight: "number"
-                        }
+                            weight: "number",
+                        },
                     },
                     border: {
                         display: true,
-                        width: 3
-                    }
+                        width: 3,
+                    },
                 },
             },
             plugins: {
@@ -257,19 +263,44 @@ function renderChart(labels, data) {
                     labels: {
                         boxWidth: 4,
                         font: {
-                            size: 10,
-                        }
-                    }
-                }
-            },
+                            size: 8,
+                        },
+                    },
+                },
+                tooltip: {
+                    titleColor: "#37474F",
+                    bodyColor: "#37474F",
+                    backgroundColor: "#d1d5dbbf",
+                    callbacks: {
+                        // Modify the tooltip title
+                        title: function (context) {
+                            console.log("title context", context)
+                            return `Week: ${ context[0].label }`;
+                                    },
+                        // Modify the tooltip label content
+                        label: function (context) {
+                            console.log("label context", context)
+                            const label = context.dataset.label
+                            const value = context.formattedValue;
+                            return `${ label }: ${ value } cals/day`;
+                        },
+                    },
+                    titleFont: {
+                        size: 8, // Title font size set to 8px
+                      },
+                      bodyFont: {
+                        size: 10, // Label font size set to 10px
+                      },
+                },
             elements: {
                 point: {
-                    radius: 2
+                    radius: 2,
                 },
                 line: {
-                    borderWidth: 5
-                }
-            }
+                    borderWidth: 5,
+                },
+            },
         },
+    },
     });
 }

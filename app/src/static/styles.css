@@ -4,10 +4,10 @@
   font-size: 62.5%;
   font-family: Helvetica, Arial, sans-serif;
   /* Sizes*/
-  --font-size-normal: 1rem;
-  --font-size-h1: 1.6rem;
-  --font-size-h2: 1.4rem;
-  --font-size-h3: 1.2rem;
+  --font-size-h1: 1.3rem;
+  --font-size-h2: 1.1rem;
+  --font-size-h3: 1rem;
+  --font-size-normal: 0.8rem;
   /* Gap */
   --gap-xlarge: 2rem;
   --gap-large: 1rem;
@@ -29,15 +29,11 @@
   --border-radius-medium: 0.5rem;
   --border-radius-small: 0.25rem;
   /* Colors */
-  --container-color: #dedede;
-  --font-color-primary: #37474F;
-  --font-color-secondary: #42a4f5;
-  --font-color-interactive: #4CAF50;
-  --button-color-primary: rgba(255, 111, 67, 0.5);
-  --button-color-hover: rgba(38, 197, 218, 0.5);
-  --card-color-primary: rgba(255, 111, 67, 0.5);
-  --card-color-hover: rgba(38, 197, 218, 0.5);
-  --border-color: rgba(209, 213, 219, 0.75);
+  --shadow-color: rgb(136, 136, 136);
+  --container-color: rgba(230, 230, 230, 0.5);
+  --font-color-primary: rgb(55, 71, 79, 1);
+  --button-color-primary: rgba(255, 111, 67, 0.3);
+  --border-color: rgba(209, 213, 219, 0.749);
  
 }
 
@@ -48,9 +44,9 @@
 * {
   margin: 0;
   padding: 0;
-  border-style: solid;
+  /* border-style: solid;
   border-color: red;
-  border-width: 0px;
+  border-width: 0px; */
 }
 
 body {
@@ -61,7 +57,7 @@ body {
 body .main-container {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-medium);
+  gap: var(--gap-large);
 }
 
 /** ///////////////////////////////////////////////////////////////////////////
@@ -71,12 +67,12 @@ body .main-container {
   padding: var(--padding-large);
   backdrop-filter: blur(1.1rem) saturate(175%);
   -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: var(--container-color);
   border-radius: var(--border-radius-xlarge);
   border: var(--width-xsmall) solid var(--border-color);
-  -moz-box-shadow: 0 0 var(--width-small) #888;
-  -webkit-box-shadow: 0 0 var(--width-small) #888;
-  box-shadow: 0 0 var(--width-small) #888;
+  -moz-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  -webkit-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  box-shadow: 0 0 var(--width-small) var(--shadow-color); */
 }
 
 .main-container header h1 {
@@ -94,8 +90,28 @@ body .main-container {
   gap: var(--gap-large);
 }
 /** ///////////////////////////////////////////////////////////////////////////
-/////////////////////////////////    MAIN     /////////////////////////////////
-////////////////////////////////    ASIDE     /////////////////////////////////
+//////////////////////////////// ABOUT STYLING /////////////////////////////////
+/////////////////////////////////////////////////////////////////////////// **/
+section.about {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  color: var(--font-color-primary);
+  padding: var(--padding-large);
+  border-top: var(--width-xsmall) double var(--border-color);
+  border-bottom: var(--width-xsmall) double var(--border-color);
+}
+
+section.about h3 {
+  color: var(--font-color-primary);
+  font-size: var(--font-size-h3);
+}
+
+section.about span {
+  color: var(--font-color-primary);
+  font-size: var(--font-size-normal);
+}
+/** ///////////////////////////////////////////////////////////////////////////
 //////////////////////////////// FORM STYLING /////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// **/
 .main-container main aside form {
@@ -112,6 +128,15 @@ body .main-container {
   justify-content: space-between;
   align-items: center;
   gap: var(--gap-medium);
+  padding: var(--padding-large);
+  backdrop-filter: blur(1.1rem) saturate(175%);
+  -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
+  background-color: var(--container-color);
+  border-radius: var(--border-radius-xlarge);
+  border: var(--width-xsmall) solid var(--border-color);
+  -moz-box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
+  -webkit-box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
+  box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
 }
 
 section.toggles .toggle-container {
@@ -122,9 +147,12 @@ section.toggles .toggle-container {
   gap: var(--gap-medium);
   backdrop-filter: blur(1.1rem) saturate(175%);
   -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
-  background-color: rgba(255, 255, 255, 0.75);
+  background-color: var(--container-color);
   border-radius: var(--border-radius-xlarge);
   border: var(--width-xsmall) solid var(--border-color);
+  -moz-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  -webkit-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  box-shadow: 0 0 var(--width-small) var(--shadow-color);
 }
 
 section.toggles .tooltip {
@@ -213,12 +241,15 @@ section.toggles input:checked + label .action span.option-2 {
   display: flex;
   flex-direction: column;
   gap: var(--gap-large);
+  padding: var(--padding-large);
   backdrop-filter: blur(1.1rem) saturate(175%);
   -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: var(--padding-large);
+  background-color: var(--container-color);
   border-radius: var(--border-radius-xlarge);
   border: var(--width-xsmall) solid var(--border-color);
+  -moz-box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
+  -webkit-box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
+  box-shadow: 0 0 var(--width-xsmall) var(--shadow-color);
 }
 
 .main-container main aside form section.ranges .range {
@@ -272,15 +303,15 @@ section.toggles input:checked + label .action span.option-2 {
   margin-top: -0.15rem; /* Centers thumb on the track
 
   /*custom styles*/
-  background-color: var(--font-color-primary);
+  background-color: var(--button-color-primary);
   border-radius: var(--border-radius-large);
   height: 1rem;
   width: 1.25rem;
 }
 
 .range input[type="range"]:focus::-webkit-slider-thumb {   
-  border: 0.1rem solid var(--font-color-primary);
-  outline: 0.1rem solid var(--font-color-primary);
+  border: 0.1rem solid var(--button-color-primary);
+  outline: 0.1rem solid var(--button-color-primary);
   outline-offset: 0.125rem; 
 }
 
@@ -297,15 +328,15 @@ section.toggles input:checked + label .action span.option-2 {
   border: none; /*Removes extra border that FF applies*/
 
   /*custom styles*/
-  background-color: var(--font-color-primary);
+  background-color: var(--button-color-primary);
   border-radius: var(--border-radius-large);
   height: 1rem;
   width: 1.25rem;
 }
 
 .range input[type="range"]:focus::-moz-range-thumb {
- border: 0.1rem solid var(--font-color-primary);
- outline: 0.1rem solid var(--font-color-primary);
+ border: 0.1rem solid var(--button-color-primary);
+ outline: 0.1rem solid var(--button-color-primary);
  outline-offset: 0.125rem; 
 }
 
@@ -314,18 +345,20 @@ section.toggles input:checked + label .action span.option-2 {
 /////////////////////////////       Section    ////////////////////////////////
 ///////////////////////////// ARTICLES STYLING ////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// **/
-.main-container main section {
+.main-container main section.main-content {
   display: flex;
   flex-direction: column;
   gap: var(--gap-xlarge);
+  padding: var(--padding-large);
   backdrop-filter: blur(1.1rem) saturate(175%);
   -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
-  background-color: rgba(255, 255, 255, 0.75);
-  padding: var(--padding-large);
+  background-color: var(--container-color);
   border-radius: var(--border-radius-xlarge);
   border: var(--width-xsmall) solid var(--border-color);
 }
-
+/** ///////////////////////////////////////////////////////////////////////////
+/////////////////////////////// ACTIVITY FACTOR ///////////////////////////////
+/////////////////////////////////////////////////////////////////////////// **/
 .activity-factor {
   display: flex;
   flex-flow: row wrap;
@@ -363,6 +396,7 @@ section.toggles input:checked + label .action span.option-2 {
 .container-body .container-title {
   text-transform: uppercase;
   color: var(--font-color-primary);
+  padding-top: var(--padding-small);
   padding-bottom: var(--padding-small);
   border-bottom: var(--width-xsmall) solid var(--border-color);
   border-top: var(--width-xsmall) solid var(--border-color);
@@ -371,29 +405,39 @@ section.toggles input:checked + label .action span.option-2 {
 .container-body .container-content {
   width: fit-content;
   text-decoration: none;
-  -moz-box-shadow: 0 0 var(--width-xsmall) var(--width-xsmall) #888;
-  -webkit-box-shadow: 0 0 var(--width-xsmall) var(--width-xsmall)#888;
-  box-shadow: 0 0 var(--width-xsmall) var(--width-xsmall) #888;
-  border-radius: var(--border-radius-medium);
+  border-top-right-radius: var(--border-radius-medium);
+  border-bottom-right-radius: var(--border-radius-medium);
   padding: var(--padding-small);
-  background-color: var(--border-color);
+  background-color: var(--button-color-primary);
   color: var(--font-color-primary);
   font-weight: 500;
 }
 
 .container-value-box {
   margin-bottom: auto;
+  flex: 0 0 auto;
+  display: flex;
+  flex-flow: column wrap;
+  gap: var(--gap-small);
 }
 
 .container-value-box i {
   font-size: var(--font-size-h1);
   color: var(--font-color-primary);
-  text-shadow: var(--width-xsmall) var(--width-xsmall) var(--width-xsmall) #ccc;
+  text-shadow: var(--width-small) var(--width-small) var(--width-small) #ccc;
+  text-align: center;
+}
+
+.container-value-box span {
+  font-size: var(--font-size-normal);
+  color: var(--font-color-primary);
   text-align: center;
 }
 
 .container-value-box i.fa-solid.fa-heart,
-.container-value-box i.fa-solid.fa-heart-pulse {
+.container-value-box i.fa-solid.fa-heart-pulse,
+.container-value-box i.fa-solid.fa-heart-circle-exclamation,
+.container-value-box i.fa-solid.fa-heart-circle-bolt {
   transform-origin: center;
 }
 
@@ -418,29 +462,52 @@ section.toggles input:checked + label .action span.option-2 {
 	to { transform: scale(1.25); }
 }
 
-.container-value-box .activity-factor-value {
+/* .container-value-box .activity-factor-value {
   color: var(--font-color-primary);
   font-size: var(--font-size-h3);
   text-shadow: var(--width-xsmall) var(--width-xsmall) var(--width-xsmall) #ccc;
   text-align: center;
+} */
+/** ///////////////////////////////////////////////////////////////////////////
+///////////////////////////////////// PLOT ////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////// **/
+.plot h2 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: var(--font-size-h2);
+  color: var(--font-color-primary);
 }
 
-.activity-factor-container .container-value-box {
-  flex: 0 0 auto;
-  display: flex;
-  flex-flow: column wrap;
-  gap: var(--gap-small);
+.plot .chart-container {
+  margin-top: var(--gap-large);
+  padding: var(--padding-medium);
+  backdrop-filter: blur(1.1rem) saturate(175%);
+  -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
+  background-color: var(--container-color);
+  border-top-left-radius: var(--border-radius-large);
+  border-top-right-radius: var(--border-radius-large);
+  border-bottom-left-radius: var(--border-radius-xlarge);
+  border-bottom-right-radius: var(--border-radius-xlarge);
+  border: var(--width-xsmall) solid var(--border-color);
+  -moz-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  -webkit-box-shadow: 0 0 var(--width-small) var(--shadow-color);
+  box-shadow: 0 0 var(--width-small) var(--shadow-color);
 }
-
-
 /** ///////////////////////////////////////////////////////////////////////////
 /////////////////////////////// FOOTER STYLING ////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// **/
 .main-container footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap-small);
+  font-size: 0.8rem;
+  color: var(--font-color-primary);
   padding: var(--padding-large);
-  backdrop-filter: blur(1.1rem) saturate(175%);
-  -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
-  background-color: rgba(255, 255, 255, 0.75);
-  border-radius: var(--border-radius-xlarge);
-  border: var(--width-xsmall) solid var(--border-color);
+  border-top: var(--width-xsmall) double var(--border-color);
+  border-bottom: var(--width-xsmall) double var(--border-color);
+}
+
+footer a {
+  color: var(--font-color-primary);
+  text-decoration: none;
 }
