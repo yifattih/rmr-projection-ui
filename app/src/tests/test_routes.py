@@ -1,5 +1,4 @@
 import pytest
-from flask import Flask
 from ..routes import app
 import subprocess
 import time
