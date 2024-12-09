@@ -31,4 +31,4 @@ ENV PATH="/home/yifattih/.local/bin:$PATH"
 COPY src/ /app/src/
 
 # Command to run the app (e.g., a Flask app)
-CMD ["gunicorn", "--timeout", "0", "-w", "4", "-b", "0.0.0.0:4000", "src.wsgi:app"]
+CMD exec gunicorn --bind :4000 --workers 1 --threads 8 --timeout 0 main:app
