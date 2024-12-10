@@ -24,6 +24,7 @@ $(document).ready(function () {
     $(".checkbox-sex").click(function () {
         // Toggle sex based on checkbox state
         sex = $(this).is(":checked") ? "male" : "female";
+        changeFactor(sex); // Change activity factor label 
         sendData(sex, units);  // Send updated data to server
     });
 
@@ -102,6 +103,33 @@ function updateField(valueSelector, valueLabel, factor, limits, unit) {
     // Update value label and unit text in the UI
     $(`.level-value${valueLabel}`).text(newValue);
     $(`.unit${valueLabel}`).text(unit);
+}
+
+/**
+ * Change the activity factor label according to sex
+ * @param {string} sex - The user's sex ('male' or 'female')
+ */
+function changeFactor(sex) {
+    const isFemale = sex === "female";
+
+    const activityFactors = isFemale
+    ? {
+        sedentary: "Factor = 1.00",
+        lowActive: "Factor = 1.12",
+        active: "Factor = 1.27",
+        veryActive: "Factor = 1.45",
+      }
+    : {
+        sedentary: "Factor = 1.00",
+        lowActive: "Factor = 1.11",
+        active: "Factor = 1.25",
+        veryActive: "Factor = 1.48",
+      };
+    // Update activity factor in UI
+    $(".container-content.sedentary-factor").text(activityFactors.sedentary);
+    $(".container-content.low-active-factor").text(activityFactors.lowActive);
+    $(".container-content.active-factor").text(activityFactors.active);
+    $(".container-content.very-active-factor").text(activityFactors.veryActive);
 }
 
 /**
@@ -209,6 +237,7 @@ function renderChart(labels, data) {
                         color: "#37474F",
                         text: "Week",  // X-axis title
                         font: {
+                            size: 16,
                             weight: "bold",
                         },
                     },
@@ -220,7 +249,7 @@ function renderChart(labels, data) {
                         maxRotation: 0,
                         minRotation: 0,
                         font: {
-                            size: 12,
+                            size: 14,
                             weight: "number",
                         },
                     },
@@ -235,6 +264,7 @@ function renderChart(labels, data) {
                         color: "#37474F",
                         text: "RMR (cals/day)",  // Y-axis title
                         font: {
+                            size: 16,
                             weight: "bold",
                         },
                     },
@@ -246,7 +276,7 @@ function renderChart(labels, data) {
                         maxRotation: 0,
                         minRotation: 0,
                         font: {
-                            size: 12,
+                            size: 14,
                             weight: "number",
                         },
                     },
@@ -263,7 +293,7 @@ function renderChart(labels, data) {
                     labels: {
                         boxWidth: 4,
                         font: {
-                            size: 8,
+                            size: 16,
                         },
                     },
                 },
@@ -274,22 +304,20 @@ function renderChart(labels, data) {
                     callbacks: {
                         // Modify the tooltip title
                         title: function (context) {
-                            console.log("title context", context)
                             return `Week: ${ context[0].label }`;
                                     },
                         // Modify the tooltip label content
                         label: function (context) {
-                            console.log("label context", context)
                             const label = context.dataset.label
                             const value = context.formattedValue;
                             return `${ label }: ${ value } cals/day`;
                         },
                     },
                     titleFont: {
-                        size: 8, // Title font size set to 8px
+                        size: 14, // Title font size set to 8px
                       },
                       bodyFont: {
-                        size: 10, // Label font size set to 10px
+                        size: 16, // Label font size set to 10px
                       },
                 },
             elements: {

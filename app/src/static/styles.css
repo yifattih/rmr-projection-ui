@@ -4,14 +4,15 @@
   font-size: 62.5%;
   font-family: Helvetica, Arial, sans-serif;
   /* Sizes*/
-  --font-size-h1: 1.3rem;
-  --font-size-h2: 1.1rem;
-  --font-size-h3: 1rem;
-  --font-size-normal: 0.8rem;
+  --font-size-normal: 1.6rem;
+  --font-size-special: 1.2rem;
+  --font-size-h1: 2.1rem; /* About 1.3x normal font size */
+  --font-size-h2: 1.8rem; /* About 1.15x normal font size */
+  --font-size-footer: 1rem; /* About 0.65x normal font size */
   /* Gap */
-  --gap-xlarge: 2rem;
+  --gap-big: 2rem;
   --gap-large: 1rem;
-  --gap-medium: 0.5rem;
+  --gap-medium: 0.75rem;
   --gap-small:0.5rem;
   /* Padding */
   --padding-large: 1rem;
@@ -65,8 +66,8 @@ body .main-container {
 /////////////////////////////////////////////////////////////////////////// **/
 .main-container header {
   padding: var(--padding-large);
-  backdrop-filter: blur(1.1rem) saturate(175%);
-  -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
+  /* backdrop-filter: blur(1.1rem) saturate(175%);
+  -webkit-backdrop-filter: blur(1.1rem) saturate(175%); */
   /* background-color: var(--container-color);
   border-radius: var(--border-radius-xlarge);
   border: var(--width-xsmall) solid var(--border-color);
@@ -76,7 +77,7 @@ body .main-container {
 }
 
 .main-container header h1 {
-  text-align: center;
+  text-align: left;
   text-transform: uppercase;
   font-size: var(--font-size-h1);
   color: var(--font-color-primary);
@@ -102,9 +103,9 @@ section.about {
   border-bottom: var(--width-xsmall) double var(--border-color);
 }
 
-section.about h3 {
+section.about h2 {
   color: var(--font-color-primary);
-  font-size: var(--font-size-h3);
+  font-size: var(--font-size-h2);
 }
 
 section.about span {
@@ -348,7 +349,7 @@ section.toggles input:checked + label .action span.option-2 {
 .main-container main section.main-content {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-xlarge);
+  gap: var(--gap-big);
   padding: var(--padding-large);
   backdrop-filter: blur(1.1rem) saturate(175%);
   -webkit-backdrop-filter: blur(1.1rem) saturate(175%);
@@ -369,8 +370,7 @@ section.toggles input:checked + label .action span.option-2 {
 
 .activity-factor h2 {
   flex: 1 1 100%;
-  text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   font-size: var(--font-size-h2);
   color: var(--font-color-primary);
 }
@@ -387,13 +387,14 @@ section.toggles input:checked + label .action span.option-2 {
 }
 
 .activity-factor-container .container-body {
-  flex: 0 0 75%;
+  flex: 0 0 65%;
   display: flex;
   flex-flow: column wrap;
   gap: var(--gap-medium);
 }
 
 .container-body .container-title {
+  font-size: var(--font-size-normal);
   text-transform: uppercase;
   color: var(--font-color-primary);
   padding-top: var(--padding-small);
@@ -411,6 +412,7 @@ section.toggles input:checked + label .action span.option-2 {
   background-color: var(--button-color-primary);
   color: var(--font-color-primary);
   font-weight: 500;
+  font-size: var(--font-size-normal);
 }
 
 .container-value-box {
@@ -459,7 +461,7 @@ section.toggles input:checked + label .action span.option-2 {
 
 /* Heart beat animation */
 @keyframes beat {
-	to { transform: scale(1.25); }
+	to { transform: scale(1.5); }
 }
 
 /* .container-value-box .activity-factor-value {
@@ -472,8 +474,7 @@ section.toggles input:checked + label .action span.option-2 {
 ///////////////////////////////////// PLOT ////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// **/
 .plot h2 {
-  text-transform: uppercase;
-  text-align: center;
+  text-align: left;
   font-size: var(--font-size-h2);
   color: var(--font-color-primary);
 }
@@ -500,7 +501,7 @@ section.toggles input:checked + label .action span.option-2 {
   display: flex;
   flex-direction: column;
   gap: var(--gap-small);
-  font-size: 0.8rem;
+  font-size: var(--font-size-special);
   color: var(--font-color-primary);
   padding: var(--padding-large);
   border-top: var(--width-xsmall) double var(--border-color);

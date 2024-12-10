@@ -9,28 +9,30 @@
         <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
         <script src="{{ url_for('static', filename='script.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <title>RMR Projector</title>
+        <title>RMR Projection</title>
     </head>
     <body>
         <div class="main-container">
             <header>
-                <h1>Resting Metabolic Rate Projector</h1>
+                <h1>Resting Metabolic Rate Projection</h1>
             </header>
             <main>
                 <section class="about">
-                    <h3>Resting Metabolic Rate (RMR)</h3> 
+                    <h2> About</h2> 
                     <span>
-                        RMR represents the number of calories your body needs to
-                        perform essential functions, like breathing and maintaining
-                        body temperature, while at rest.
+                        The Resting Metabolic Rate (RMR) represents the number
+                        of calories your body needs to perform essential
+                        functions, like breathing and maintaining body
+                        temperature, while at rest.
                         It serves as the baseline for estimating daily energy
                         requirements and varies based on age, weight, height, sex,
                         and body composition.
                     </span>
                     <span>
-                        This web app provides a weekly projection of the
-                        estimated RMR, tailored to your weight loss goal per
-                        week and the total duration in weeks.
+                        This web app offers a weekly projection of your
+                        estimated RMR, customizable to your desired weekly
+                        weight loss goal and the total projection duration
+                        in weeks.
                     </span>
                 </section>
                 <aside>
@@ -91,13 +93,13 @@
                                 <input class="level height" type="range" min="50" max="200" value="85" oninput="heightout.value = this.value" name="height">
                             </div>
                             <div class="range">
-                                <label class="title" for="rate-slider">Weight Loss Goal</label>
+                                <label class="title" for="rate-slider">Weekly Weight Loss Goal</label>
                                 <output class= "level-value rate" id="rateout">2</output>
                                 <label class="unit rate" for="rate-slider">lbs</label>
                                 <input class="level rate" type="range" min="0" max="20" step="1" value="2" oninput="rateout.value = this.value" name="weight_loss_rate">
                             </div>
                             <div class="range">
-                                <label class="title" for="time-slider">Duration</label>
+                                <label class="title" for="time-slider">Projection Duration</label>
                                 <output class= "level-value" id="timeout">24</output>
                                 <label class="unit" for="time-slider">weeks</label>
                                 <input class="level time" type="range" min="0" max="52" value="24" oninput="timeout.value = this.value" name="duration">
@@ -111,8 +113,11 @@
                         <div class="activity-factor-container">
                             <div class="container-body">
                                 <span class="container-title">Sedentary</span>
+                                <a class="container-content sedentary-factor" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor = 1.00
+                                </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                    Day-to-day activity
+                                    Normal day-to-day activity
                                 </a>
                             </div>
                             <div class="container-value-box">
@@ -123,15 +128,15 @@
                         <div class="activity-factor-container">
                             <div class="container-body">
                                 <span class="container-title">Low Active</span>
+                                <a class="container-content low-active-factor" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor = 1.12
+                                </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
                                     <i class="fa-solid fa-person-walking"></i>
                                     <span class="low-active-text">1.5–3 m at 3–4 mph</span>
                                 </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                    Day-to-day activity
-                                </a>
-                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                    Factor | Males = 1.11 | Females = 1.12
+                                    Normal day-to-day activity
                                 </a>
                             </div>
                             <div class="container-value-box">
@@ -142,15 +147,15 @@
                         <div class="activity-factor-container">
                             <div class="container-body">
                                 <span class="container-title">Active</span>
+                                <a class="container-content  active-factor" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor = 1.27
+                                </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
                                     <i class="fa-solid fa-person-walking"></i>
                                     <span class="active-text">3+ m at 3–4 mph</span>
                                 </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
                                     60+ mins brisk activity
-                                </a>
-                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                    Factor | Males = 1.25 | Females = 1.27
                                 </a>
                             </div>
                             <div class="container-value-box">
@@ -161,15 +166,15 @@
                         <div class="activity-factor-container">
                             <div class="container-body">
                                 <span class="container-title">Very Active</span>
+                                <a class="container-content  very-active-factor" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
+                                    Factor = 1.45
+                                </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
                                     <i class="fa-solid fa-person-walking"></i>
                                     <span class="very-active-text">7.5+ m at 3–4 mph</span>
                                 </a>
                                 <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
                                     60+ mins vigorous activity
-                                </a>
-                                <a class="container-content" href="https://www.ncbi.nlm.nih.gov/books/NBK278991/table/diet-treatment-obes.table12est/#_ncbi_dlg_citbx_NBK278991" target="_blank">
-                                    Factor | Males = 1.48 | Females = 1.45
                                 </a>
                             </div>
                             <div class="container-value-box">
@@ -179,7 +184,7 @@
                         </div>
                     </article>
                     <article class="plot">
-                        <h2>Weekly RMR Projections</h2>
+                        <h2>Projected RMR Over Time (Weeks)</h2>
                         <div class="chart-container">
                             <canvas id="chartContext"></canvas>
                         </div>
