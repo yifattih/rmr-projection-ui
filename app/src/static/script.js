@@ -6,7 +6,7 @@ $(document).ready(function () {
     // Fix chart container dimensions same as parent
     const context = $("#chartContext");
     context.attr('width', $(".chart-container").width());
-    context.attr('height', $(".chart-container").height()*2); // Adjust height as needed
+    context.attr('height', $(".chart-container").height()*2.10); // Adjust height as needed
 
     // Initial data transmission to server with default settings
     sendData(sex, units);

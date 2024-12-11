@@ -45,9 +45,7 @@
 * {
   margin: 0;
   padding: 0;
-  /* border-style: solid;
-  border-color: red;
-  border-width: 0px; */
+  /* border: 0.1 solid red; */
 }
 
 body {
@@ -96,7 +94,7 @@ body .main-container {
 section.about {
   display: flex;
   flex-direction: column;
-  gap: var(--gap-small);
+  gap: var(--gap-medium);
   color: var(--font-color-primary);
   padding: var(--padding-large);
   border-top: var(--width-xsmall) double var(--border-color);
@@ -294,7 +292,7 @@ section.toggles input:checked + label .action span.option-2 {
 .range input[type="range"]::-webkit-slider-runnable-track {
   background-color: var(--border-color);
   border-radius: var(--border-radius-medium);
-  height: 0.75rem;  
+  height: 1.5rem;  
 }
 
 /* slider thumb */
@@ -306,7 +304,7 @@ section.toggles input:checked + label .action span.option-2 {
   /*custom styles*/
   background-color: var(--button-color-primary);
   border-radius: var(--border-radius-large);
-  height: 1rem;
+  height: 1.75rem;
   width: 1.25rem;
 }
 
@@ -321,7 +319,7 @@ section.toggles input:checked + label .action span.option-2 {
 .range input[type="range"]::-moz-range-track {
   background-color: var(--border-color);
   border-radius: var(--border-radius-medium);
-  height: 0.75rem;  
+  height: 1.5rem;  
 }
 
 /* slider thumb */
@@ -331,7 +329,7 @@ section.toggles input:checked + label .action span.option-2 {
   /*custom styles*/
   background-color: var(--button-color-primary);
   border-radius: var(--border-radius-large);
-  height: 1rem;
+  height: 1.75rem;
   width: 1.25rem;
 }
 
@@ -342,8 +340,6 @@ section.toggles input:checked + label .action span.option-2 {
 }
 
 /** ///////////////////////////////////////////////////////////////////////////
-//////////////////////////////       MAIN      ////////////////////////////////
-/////////////////////////////       Section    ////////////////////////////////
 ///////////////////////////// ARTICLES STYLING ////////////////////////////////
 /////////////////////////////////////////////////////////////////////////// **/
 .main-container main section.main-content {
@@ -365,7 +361,7 @@ section.toggles input:checked + label .action span.option-2 {
   flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
-  gap: var(--gap-large);
+  gap: var(--gap-big);
 }
 
 .activity-factor h2 {
@@ -461,7 +457,7 @@ section.toggles input:checked + label .action span.option-2 {
 
 /* Heart beat animation */
 @keyframes beat {
-	to { transform: scale(1.5); }
+	to { transform: scale(1.35); }
 }
 
 /* .container-value-box .activity-factor-value {
@@ -511,4 +507,97 @@ section.toggles input:checked + label .action span.option-2 {
 footer a {
   color: var(--font-color-primary);
   text-decoration: none;
+}
+
+/** ///////////////////////////////////////////////////////////////////////////
+////////////////////////////   MEDIA QUERIES   ////////////////////////////////
+/////////////////////////////////////////////////////////////////////////// **/
+/* TABLETS */
+@media (768px <= width < 1024px )  {
+  .main-container main {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap-large);
+  }
+
+  .main-container main aside {
+    flex: 1 1 100%;
+  }
+
+  .main-container main aside form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: var(--gap-large);
+  }
+
+  .toggles {
+    flex: 1 1 25%;
+  }
+
+  .ranges {
+    flex: 3 1 auto;
+  }
+
+  .activity-factor-container {
+    flex: 1 1 45%;
+    min-height: 15rem;
+  }
+
+  .container-body {
+    flex: 1 1 25%;
+  }
+}
+
+/* DESKTOPS */
+@media (width >= 1024px) {
+  .main-container main {
+    display: flex;
+    flex-flow: row wrap;
+    gap: var(--gap-large);
+  }
+
+  .main-container main aside {
+    flex: 1 1 25%;
+  }
+
+  .main-container main aside form {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: var(--gap-large);
+  }
+
+  .toggles {
+    flex: 1 1 25%;
+  }
+
+  .ranges {
+    flex: 3 1 auto;
+  }
+
+  .main-content {
+    flex: 1 1 100%;
+  }
+
+  .activity-factor-container {
+    flex: 1 1 5%;
+    min-height: 10rem;
+  }
+
+  .container-body .container-title {
+    font-size: var(--font-size-normal);
+  }
+
+  .container-body .container-content {
+    font-size: var(--font-size-special);
+  }
+
+  .container-value-box {
+    flex: 1 1 8%;
+  }
+
+  .container-value-box span {
+    font-size: var(--font-size-special);
+  }
 }
