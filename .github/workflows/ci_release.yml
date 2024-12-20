@@ -54,7 +54,7 @@ jobs:
       # Step 6: Run unit tests and generate a coverage report
       - name: Run tests with Pytest and generate coverage report
         run: |
-          API_URL="https://www.dummy.com"
+          export API_URL="https://www.dummy.com"
           pytest --cov=. --cov-report=xml --cov-report=term
       #######################################################################
       # Step 7: Upload coverage report to Codecov
