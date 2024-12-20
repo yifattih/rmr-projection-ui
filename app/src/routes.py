@@ -46,7 +46,7 @@ def submit():
             return jsonify({"error": f"Missing value for {key}"}), 400
 
     try:
-        response = requests.post(api_url, json=form_data)
+        response = requests.post(api_endpoint, json=form_data)
         response.raise_for_status()
         response_data = response.json()
     except requests.exceptions.RequestException as e:
