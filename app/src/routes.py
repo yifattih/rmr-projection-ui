@@ -6,6 +6,7 @@ app = Flask(__name__)
 
 # Get API URL from environment variable
 api_url = os.environ.get("API_URL")
+api_endpoint = f"{api_url}/rmr/"
 if not api_url:
     raise EnvironmentError("API_URL environment variable not set.")
 
