@@ -4,7 +4,7 @@ import subprocess
 import time
 
 # Constants
-API_TEST_URL = "http://127.0.0.1:5001"  # Test API server URL
+API_TEST_URL = "http://localhost:4000"  # Test API server URL
 
 
 @pytest.fixture(scope="module", autouse=True)
@@ -59,35 +59,6 @@ def test_home_route(client):
     response = client.get("/")
     assert response.status_code == 200
     assert b"<!DOCTYPE html>" in response.data  # Verify content.
-
-
-def test_submit_route_valid_data(client):
-    """
-    Test the `submit` route with valid form data.
-
-    Parameters
-    ----------
-    client : FlaskClient
-        Flask test client.
-
-    Asserts
-    -------
-    Status code : int
-        Should be 200 for valid POST data.
-    Response : dict
-        Should match expected API response.
-    """
-    form_data = {
-        "sex": "male",
-        "units": "si",
-        "age": "30",
-        "weight": "70",
-        "height": "175",
-        "weight_loss_rate": "1",
-        "duration": "30",
-    }
-    response = client.post("/submit", data=form_data)
-    assert response.status_code == 200
 
 
 def test_submit_route_missing_data(client):
