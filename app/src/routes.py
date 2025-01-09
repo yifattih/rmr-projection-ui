@@ -1,8 +1,12 @@
 import os
 import requests
 from flask import Flask, render_template, request, jsonify
+from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
+
+# Enable Prometheus metrics
+metrics = PrometheusMetrics(app)
 
 # Get API URL from environment variable
 api_url = os.environ.get("API_URL")
@@ -21,6 +25,9 @@ def home() -> str:
     """
     return render_template("index.html")
 
+@app.route('/health')
+def health():
+    return "OK", 200
 
 @app.route("/submit", methods=["POST"])
 def submit():
