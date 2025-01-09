@@ -2,3 +2,4 @@ requests
 numpy
 Flask
 gunicorn
+prometheus-flask-exporter
