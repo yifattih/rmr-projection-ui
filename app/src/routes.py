@@ -9,10 +9,19 @@ app = Flask(__name__)
 metrics = PrometheusMetrics(app)
 
 # Get API URL from environment variable
-api_url = os.environ.get("API_URL")
-api_endpoint = f"{api_url}/rmr/"
-if not api_url:
-    raise EnvironmentError("API_URL environment variable not set.")
+try:
+    api_url = os.environ.get("API_URL")
+    assert api_url != None
+    api_health = {"message": requests.get(f"{api_url}/health").text,
+                  "status_code": requests.get(f"{api_url}/health").status_code}
+except AssertionError:
+    api_health = {"message": "API_URL environment variable not set",
+                  "status_code": 500}
+except requests.exceptions.MissingSchema as e:
+    api_health = {"message": "Wrong URL schema for API_URL",
+                  "status_code": 500}
+
+api_endpoint = "/rmr/"
 
 
 @app.route("/")
@@ -27,7 +36,8 @@ def home() -> str:
 
 @app.route('/health')
 def health():
-    return "OK", 200
+    return jsonify({"message": "Healthy",
+                    "dependencies": {"api": api_health}}), 200
 
 @app.route("/submit", methods=["POST"])
 def submit():
@@ -53,7 +63,7 @@ def submit():
             return jsonify({"error": f"Missing value for {key}"}), 400
 
     try:
-        response = requests.post(api_endpoint, json=form_data)
+        response = requests.post(f"{api_url}{api_endpoint}", json=form_data)
         response.raise_for_status()
         response_data = response.json()
     except requests.exceptions.RequestException as e:
