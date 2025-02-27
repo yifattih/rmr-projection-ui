@@ -1,6 +1,10 @@
 import os
+from datetime import datetime, timezone
 import requests
 from flask import Flask, render_template, request, jsonify
+
+service_start_time_utc = datetime.now(timezone.utc)
+
 
 service = Flask(__name__)
 
@@ -26,11 +30,6 @@ def root() -> str:
     Root endpoint that renders the index.html template.
     """
     return render_template("index.html")
-
-@service.route('/health')
-def health():
-    return jsonify({"message": "Healthy",
-                    "dependencies": {"api": api_health}}), 200
 
 @service.route("/submit", methods=["POST"])
 def submit():
@@ -65,3 +64,18 @@ def submit():
         return jsonify({"error": "Invalid JSON response from API"}), 500
 
     return jsonify(response_data)
+
+@service.get('/health')
+def health_check():
+    """
+    Endpoint that returns the status of the service.
+    """
+    current_time_utc = datetime.now(timezone.utc)
+    uptime_utc = current_time_utc - service_start_time_utc
+
+    health_status = {
+        "status": "healthy",
+        "uptime_utc": str(uptime_utc),
+        "timestamp": str(current_time_utc.isoformat()),
+    }
+    return health_status, 200
