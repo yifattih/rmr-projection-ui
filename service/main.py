@@ -20,13 +20,10 @@ except requests.exceptions.MissingSchema as e:
 api_endpoint = "/rmr/"
 
 
-@service.route("/")
-def home() -> str:
+@service.get("/")
+def root() -> str:
     """
-    Render the homepage.
-
-    :return: Rendered homepage HTML.
-    :rtype: str
+    Root endpoint that renders the index.html template.
     """
     return render_template("index.html")
 
