@@ -2,7 +2,7 @@ import os
 import requests
 from flask import Flask, render_template, request, jsonify
 
-app = Flask(__name__)
+service = Flask(__name__)
 
 # Get API URL from environment variable
 try:
@@ -20,7 +20,7 @@ except requests.exceptions.MissingSchema as e:
 api_endpoint = "/rmr/"
 
 
-@app.route("/")
+@service.route("/")
 def home() -> str:
     """
     Render the homepage.
@@ -30,12 +30,12 @@ def home() -> str:
     """
     return render_template("index.html")
 
-@app.route('/health')
+@service.route('/health')
 def health():
     return jsonify({"message": "Healthy",
                     "dependencies": {"api": api_health}}), 200
 
-@app.route("/submit", methods=["POST"])
+@service.route("/submit", methods=["POST"])
 def submit():
     """
     Process form data submitted from the frontend and send it to the API.
