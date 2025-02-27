@@ -1,5 +1,5 @@
 import os
-from .routes import app
+from .main import app
 
 """
 Entry point to run the Flask application.
