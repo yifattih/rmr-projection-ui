@@ -1,12 +1,8 @@
 import os
 import requests
 from flask import Flask, render_template, request, jsonify
-from prometheus_flask_exporter import PrometheusMetrics
 
 app = Flask(__name__)
-
-# Enable Prometheus metrics
-metrics = PrometheusMetrics(app)
 
 # Get API URL from environment variable
 try:
