@@ -37,6 +37,7 @@ ENV PATH="/home/yifattih/.local/bin:$PATH"
 
 # Copy only necessary application files
 COPY Procfile main.py /service/
+COPY models /service/models
 COPY otel /service/otel
 COPY static /service/static
 COPY templates /service/templates
