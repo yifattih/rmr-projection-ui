@@ -3,6 +3,9 @@ from datetime import datetime, timezone
 import requests
 from flask import Flask, render_template, request, jsonify
 from otel import logger, meter, setup_telemetry, tracer
+from models.schemas import InputData, OutputData
+from pydantic import ValidationError
+import json
 
 service_start_time_utc = datetime.now(timezone.utc)
 
@@ -38,31 +41,35 @@ def submit():
     Endpoint to process submitted form data, call API for RMR calculations,
     and return results back.
     """
-    form_data = {
-        "sex": request.form.get("sex"),
-        "units": request.form.get("units"),
-        "age": request.form.get("age"),
-        "weight": request.form.get("weight"),
-        "height": request.form.get("height"),
-        "weight_loss_rate": request.form.get("weight_loss_rate"),
-        "duration": request.form.get("duration"),
-    }
+    with tracer.start_as_current_span("submit_span") as span:
+        logger.info("Submit endpoint called")
+        
+        form_data = request.form.to_dict()
+        
+        logger.info(f"Received input data: {form_data}")
+        
+        span.set_attribute("submit.data", json.dumps(form_data))
+        
+        logger.info("Validating input data")
+        try:
+            InputData.model_validate(form_data)
+            logger.info(f"Input data validated")
+        except ValidationError as e:
+            logger.error(f"Invalid input data: {e}")
+            return jsonify({"message": "Invalid input data", "error": e}), 400
 
-    # Validate input data
-    for key, value in form_data.items():
-        if not value:
-            return jsonify({"error": f"Missing value for {key}"}), 400
+        logger.info("API call")
+        try:
+            response = requests.post(rmr_endpoint, json=form_data)
+            response.raise_for_status()
+            response_data = response.json()
+            logger.info(f"Sucessful API call")
+            span.set_attribute("response.data", json.dumps(response_data))
+        except requests.exceptions.ConnectionError as e:
+            logger.error("Failed to contact API")
+            return jsonify({"error": f"Failed to contact API: {str(e)}"}), 500
 
-    try:
-        response = requests.post(rmr_endpoint, json=form_data)
-        response.raise_for_status()
-        response_data = response.json()
-    except requests.exceptions.RequestException as e:
-        return jsonify({"error": f"Failed to contact API: {str(e)}"}), 500
-    except ValueError:
-        return jsonify({"error": "Invalid JSON response from API"}), 500
-
-    return jsonify(response_data)
+        return jsonify(response_data)
 
 @service.get('/health')
 def health_check():
