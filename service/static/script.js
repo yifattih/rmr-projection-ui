@@ -166,16 +166,16 @@ function sendData(sex, units) {
         type: "POST",
         data: formData,
         success: function (response) {
-            renderChart(response.output.time_projection, response.output.rmr);  // Render the RMR chart
+            renderChart(response.time_projection, response.rmr);  // Render the RMR chart
             
             // Update Activity Factor cards RMR values
-            let sedentaryValue = Math.round(response.output.rmr.sedentary[0]).toLocaleString();
+            let sedentaryValue = Math.round(response.rmr.sedentary[0]).toLocaleString();
             $(".sedentary-value").text(sedentaryValue + " cals/day");
-            let lowActiveValue = Math.round(response.output.rmr.low_active[0]).toLocaleString();
+            let lowActiveValue = Math.round(response.rmr.low_active[0]).toLocaleString();
             $(".low-active-value").text(lowActiveValue + " cals/day");
-            let activeValue = Math.round(response.output.rmr.active[0]).toLocaleString();
+            let activeValue = Math.round(response.rmr.active[0]).toLocaleString();
             $(".active-value").text(activeValue + " cals/day");
-            let veryActiveValue = Math.round(response.output.rmr.very_active[0]).toLocaleString();
+            let veryActiveValue = Math.round(response.rmr.very_active[0]).toLocaleString();
             $(".very-active-value").text(veryActiveValue + " cals/day");
         },
     });
