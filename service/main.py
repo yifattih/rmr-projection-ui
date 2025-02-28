@@ -2,13 +2,14 @@ import os
 from datetime import datetime, timezone
 import requests
 from flask import Flask, render_template, request, jsonify
+from otel import logger, meter, setup_telemetry, tracer
 
 service_start_time_utc = datetime.now(timezone.utc)
 
-
 service = Flask(__name__)
 
-# Get API URL from environment variable
+setup_telemetry(service)
+
 try:
     api_url = os.environ.get("API_URL")
     assert api_url != None
@@ -34,10 +35,8 @@ def root() -> str:
 @service.route("/submit", methods=["POST"])
 def submit():
     """
-    Process form data submitted from the frontend and send it to the API.
-
-    :return: API response as JSON.
-    :rtype: Response
+    Endpoint to process submitted form data, call API for RMR calculations,
+    and return results back.
     """
     form_data = {
         "sex": request.form.get("sex"),
