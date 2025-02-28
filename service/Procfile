@@ -1,1 +1,1 @@
-service: gunicorn --bind 0.0.0.0:4000 --workers 1 main:service
+service: gunicorn --bind 0.0.0.0:8000 --workers 1 main:service
