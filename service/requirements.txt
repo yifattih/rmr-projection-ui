@@ -3,6 +3,7 @@ numpy==2.2.2
 
 # Build dependencies
 Flask==3.1.0
+pydantic==2.10.6
 requests==2.32.3
 
 # Runtime dependencies
