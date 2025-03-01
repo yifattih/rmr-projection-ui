@@ -1,20 +1,26 @@
-from . import otel_logs, otel_metrics, otel_traces
 from opentelemetry.instrumentation.logging import LoggingInstrumentor
+
+from . import otel_logs, otel_metrics, otel_traces
 
 meter = otel_metrics.meter
 logger = otel_logs.logger
 tracer = otel_traces.tracer
 
 try:
-    from opentelemetry.instrumentation.fastapi import FastAPIInstrumentor # type: ignore
+    from opentelemetry.instrumentation.fastapi import \
+        FastAPIInstrumentor  # type: ignore
+
     instrumentator = FastAPIInstrumentor()
     log_message = "FastAPI instrumentator initialized"
-except:
-    from opentelemetry.instrumentation.flask import FlaskInstrumentor # type: ignore
+except ModuleNotFoundError:
+    from opentelemetry.instrumentation.flask import \
+        FlaskInstrumentor  # type: ignore
+
     instrumentator = FlaskInstrumentor()
     log_message = "Flask instrumentator initialized"
 finally:
     logger.info(log_message)
+
 
 def setup_telemetry(app) -> None:
     """Sets up OpenTelemetry instrumentation for FastAPI."""
