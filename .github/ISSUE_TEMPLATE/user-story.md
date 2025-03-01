@@ -1,21 +1,23 @@
 ---
 name: User Story
 about: Short, simple descriptions of a feature or functionality from the end-user's
-  perspective. They capture what a user wants to accomplish and why. It will usually
-  be labeled as enhancement.
-title: "Story: " 
-labels: enhancement
+  perspective. They capture what a user wants to accomplish and why.
+title: User Story
+labels: ''
 assignees: yifattih
 
 ---
+**As a** [role]  
+**I need** [function]  
+**So that** [benefit] 
 
-<!-- Issue title should mirror the User Story Title. -->
+## Details and Assumptions
+- document what you know
 
-# Title
-
-Story: Title
-
-# Description
-
-# Acceptance Criteria
-- 
+## Acceptance Criteria
+```
+Given [some context]
+When [certain action is taken]
+Then [the outcome of action is observed]
+And [optinal]
+```
