@@ -2,20 +2,22 @@ import os
 
 # Traces libraries and modules
 from opentelemetry import trace
-from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import OTLPSpanExporter
+from opentelemetry.exporter.otlp.proto.grpc.trace_exporter import \
+    OTLPSpanExporter
 from opentelemetry.sdk.trace import TracerProvider
-from opentelemetry.sdk.trace.export import BatchSpanProcessor, ConsoleSpanExporter
+from opentelemetry.sdk.trace.export import (BatchSpanProcessor,
+                                            ConsoleSpanExporter)
 
 # -------------------------
 # CONFIGURE EXPORTER for TRACES
 # -------------------------
 try:
     otlp_endpoint = os.getenv("OTLP_ENDPOINT")  # Default Alloy endpoint
-    assert otlp_endpoint != None
+    assert otlp_endpoint is not None
     trace_exporter = OTLPSpanExporter(
         endpoint=otlp_endpoint
     )  # For sending traces to an observability backend
-except:
+except ImportError:
     trace_exporter = ConsoleSpanExporter()  # For local debugging
 
 # -------------------------
