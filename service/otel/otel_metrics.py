@@ -2,23 +2,22 @@ import os
 
 # Metrics libraries and modules
 from opentelemetry import metrics
-from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import OTLPMetricExporter
+from opentelemetry.exporter.otlp.proto.grpc.metric_exporter import \
+    OTLPMetricExporter
 from opentelemetry.sdk.metrics import MeterProvider
-from opentelemetry.sdk.metrics.export import (
-    ConsoleMetricExporter,
-    PeriodicExportingMetricReader,
-)
+from opentelemetry.sdk.metrics.export import (ConsoleMetricExporter,
+                                              PeriodicExportingMetricReader)
 
 # -------------------------
 # CONFIGURE EXPORTER METRICS
 # -------------------------
 try:
     otlp_endpoint = os.getenv("OTLP_ENDPOINT")  # Default Alloy endpoint
-    assert otlp_endpoint != None
+    assert otlp_endpoint is not None
     metric_exporter = OTLPMetricExporter(
         endpoint=otlp_endpoint
     )  # For sending traces to an observability backend
-except:
+except ImportError:
     metric_exporter = ConsoleMetricExporter()
 
 # -------------------------
