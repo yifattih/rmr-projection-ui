@@ -3,9 +3,11 @@ import os
 
 # Logs libraries and modules
 from opentelemetry import _logs
-from opentelemetry.exporter.otlp.proto.grpc._log_exporter import OTLPLogExporter
+from opentelemetry.exporter.otlp.proto.grpc._log_exporter import \
+    OTLPLogExporter
 from opentelemetry.sdk._logs import LoggerProvider, LoggingHandler
-from opentelemetry.sdk._logs.export import BatchLogRecordProcessor, ConsoleLogExporter
+from opentelemetry.sdk._logs.export import (BatchLogRecordProcessor,
+                                            ConsoleLogExporter)
 
 # from opentelemetry.instrumentation.logging import LoggingInstrumentor
 
@@ -14,9 +16,9 @@ from opentelemetry.sdk._logs.export import BatchLogRecordProcessor, ConsoleLogEx
 # -------------------------
 try:
     otlp_endpoint = os.getenv("OTLP_ENDPOINT")  # Default Alloy endpoint
-    assert otlp_endpoint != None
+    assert otlp_endpoint is not None
     log_exporter = OTLPLogExporter(endpoint=otlp_endpoint)
-except:
+except AssertionError:
     log_exporter = ConsoleLogExporter()
 
 # -------------------------
