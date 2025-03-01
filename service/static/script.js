@@ -162,7 +162,7 @@ function sendData(sex, units) {
 
     // Send data to server via POST request
     $.ajax({
-        url: "/submit",
+        url: "/submit/",
         type: "POST",
         data: formData,
         success: function (response) {
