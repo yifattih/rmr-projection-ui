@@ -35,7 +35,7 @@ def root() -> str:
 
         return render_template("index.html")
 
-@service.post("/submit")
+@service.post("/submit/")
 def submit():
     """
     Endpoint to process submitted form data, call API for RMR calculations,
@@ -56,7 +56,7 @@ def submit():
             logger.info(f"Input data validated")
         except ValidationError as e:
             logger.error(f"Invalid input data: {e}")
-            return jsonify({"message": "Invalid input data", "error": e}), 400
+            return jsonify({"message": "Invalid input data", "error": str(e)}), 400
 
         logger.info("API call")
         try:
@@ -67,7 +67,7 @@ def submit():
             span.set_attribute("response.data", json.dumps(response_data))
         except requests.exceptions.ConnectionError as e:
             logger.error("Failed to contact API")
-            return jsonify({"error": f"Failed to contact API: {str(e)}"}), 500
+            return jsonify({"error": f"Failed to contact API: {str(e)}"}), 503
 
         return jsonify(response_data)
 
