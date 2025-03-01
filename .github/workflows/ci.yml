@@ -127,7 +127,7 @@ jobs:
           fail_ci_if_error: true
 
       - name: Run quality and security scan and generate report in SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v5.0.0
+        uses: SonarSource/sonarqube-scan-action@v5.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
@@ -136,8 +136,8 @@ jobs:
             -Dsonar.projectKey=my-ifattih_bmr_calculator
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.version=3.12
-            -Dsonar.python.coverage.reportPaths=coverage.xml, .devcontainer/**
-            -Dsonar.test.exclusions=tests/**
+            -Dsonar.python.coverage.reportPaths=coverage.xml
+            -Dsonar.test.exclusions=tests/**, .devcontainer/**
             -Dsonar.verbose=true
   
   filesystem-security:
