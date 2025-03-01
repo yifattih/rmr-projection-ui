@@ -25,7 +25,7 @@ addopts = [
 
 [tool.coverage.run]
 omit = [
-    "otel/*"  # Exclude everything inside otel/
+    "otel/*"
 ]
 
 [tool.coverage.report]
@@ -52,3 +52,11 @@ opentelemetry-exporter-otlp = "^1.30.0"
 opentelemetry-instrumentation = "^0.51b0"
 opentelemetry-instrumentation-fastapi = "^0.51b0"
 opentelemetry-instrumentation-logging = "^0.51b0"
+
+[tool.sonar]
+projectKey = "ifattih_bmr_calculator"
+organization = "yifattih"
+host.url = "https://sonarcloud.io"
+python.version = "3.12"
+python.coverage.reportPaths = "coverage.xml"
+exclusions = ["tests/**", ".devcontainer/**"]
