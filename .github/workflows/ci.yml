@@ -127,9 +127,10 @@ jobs:
           fail_ci_if_error: true
 
       - name: Run quality and security scan and generate report in SonarCloud
-        uses: SonarSource/sonarcloud-github-action@v3.1.0
+        uses: SonarSource/sonarcloud-github-action@v5.0.0
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_SCANNER_OPTS: "-Dsonar.python.pyproject.toml=pyproject.toml"
   
   filesystem-security:
     name: Filesystem Security Scan
