@@ -1,0 +1,47 @@
+# Ignore node_modules directory
+**/node_modules
+
+# Ignore logs
+**/logs
+**/*.log
+**/npm-debug.log*
+
+# Ignore build directories
+**/dist
+**/build
+
+# Ignore environment variables
+**/.env
+
+# Ignore Docker files
+**/Dockerfile
+**/docker-compose.yml
+**/.dockerignore
+
+# Ignore coverage directory
+**/coverage
+
+# Ignore tests directory
+tests
+
+# Ignore temporary files
+**/*.tmp
+**/*.swp
+
+# Ignore Python cache and virtual environment directories
+__pycache__/
+**/__pycache__
+**/*.pyc*.pyc
+*.pyo
+*.pyd
+**/venv/
+**/env/
+**/ENV/
+**/.venv/
+**/.pytest_cache/
+
+# Ignore Jupyter Notebook checkpoints
+**/.ipynb_checkpoints/
+
+# Ignore mypy cache
+**/.mypy_cache/

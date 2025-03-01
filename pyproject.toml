@@ -1,2 +1,54 @@
 [tool.black]
 line-length = 79
+
+[tool.flake8]
+max-line-length = 79
+ignore = [
+    "E203",
+    "E501",
+    "W503"
+    ]
+exclude = [
+    ".git",
+    "__pycache__",
+    ".pytest_cache",
+    ".devcontainer"
+    ]
+exit-zero = true
+
+[tool.pytest.ini_options]
+addopts = [
+    "--pspec",
+    "--cov=service",
+    "--cov-report=term-missing"
+]
+
+[tool.coverage.run]
+omit = [
+    "otel/*"  # Exclude everything inside otel/
+]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+]
+
+[tool.poetry]
+name = "service"
+version = "0.1.0"
+description = "A RESTful API for calculating Resting Metabolic Rate using Mifflin-St. Jeor equations"
+authors = ["Yifattih <yifattih@proton.me>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+numpy = "^2.2.2"
+fastapi = "^0.115.7"
+pydantic = "^2.10.6"
+uvicorn = "^0.34.0"
+honcho = "^2.0.0"
+opentelemetry-api = "^1.30.0"
+opentelemetry-sdk = "^1.30.0"
+opentelemetry-exporter-otlp = "^1.30.0"
+opentelemetry-instrumentation = "^0.51b0"
+opentelemetry-instrumentation-fastapi = "^0.51b0"
+opentelemetry-instrumentation-logging = "^0.51b0"

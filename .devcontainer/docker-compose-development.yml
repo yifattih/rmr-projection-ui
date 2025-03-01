@@ -1,0 +1,18 @@
+services:
+  devcontainer:
+    container_name: development-ui
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ../..:/workspaces:cached      
+    command: sleep infinity
+
+  # service:
+  #   container_name: service
+  #   build:
+  #     context: ../service
+  #     dockerfile: Dockerfile
+  #   network_mode: service:devcontainer   # Puts app and devcontainer in the same network so browsing http://127.0.0.1:8080 works
+  #   environment:
+  #     - PORT=8000
