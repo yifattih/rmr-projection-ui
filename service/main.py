@@ -1,11 +1,12 @@
+import json
 import os
 from datetime import datetime, timezone
+
 import requests
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, jsonify, render_template, request
+from models.schemas import InputData
 from otel import logger, meter, setup_telemetry, tracer
-from models.schemas import InputData, OutputData
 from pydantic import ValidationError
-import json
 
 service_start_time_utc = datetime.now(timezone.utc)
 
@@ -18,6 +19,7 @@ logger.info(f"API URL: {api_url}")
 
 rmr_endpoint = f"{api_url}/rmr/"
 logger.info(f"RMR endpoint: {rmr_endpoint}")
+
 
 @service.get("/")
 def root() -> str:
@@ -35,6 +37,7 @@ def root() -> str:
 
         return render_template("index.html")
 
+
 @service.post("/submit/")
 def submit():
     """
@@ -43,27 +46,30 @@ def submit():
     """
     with tracer.start_as_current_span("submit_span") as span:
         logger.info("Submit endpoint called")
-        
+
         form_data = request.form.to_dict()
-        
+
         logger.info(f"Received input data: {form_data}")
-        
+
         span.set_attribute("submit.data", json.dumps(form_data))
-        
+
         logger.info("Validating input data")
         try:
             InputData.model_validate(form_data)
-            logger.info(f"Input data validated")
+            logger.info("Input data validated")
         except ValidationError as e:
             logger.error(f"Invalid input data: {e}")
-            return jsonify({"message": "Invalid input data", "error": str(e)}), 400
+            return (
+                jsonify({"message": "Invalid input data", "error": str(e)}),
+                400,
+            )
 
         logger.info("API call")
         try:
             response = requests.post(rmr_endpoint, json=form_data)
             response.raise_for_status()
             response_data = response.json()
-            logger.info(f"Sucessful API call")
+            logger.info("Sucessful API call")
             span.set_attribute("response.data", json.dumps(response_data))
         except requests.exceptions.ConnectionError as e:
             logger.error("Failed to contact API")
@@ -71,7 +77,8 @@ def submit():
 
         return jsonify(response_data)
 
-@service.get('/health')
+
+@service.get("/health")
 def health_check():
     """
     Endpoint that returns the status of the service.

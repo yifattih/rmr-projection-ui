@@ -1,5 +1,7 @@
 from typing import Dict, List, Literal
+
 from pydantic import BaseModel, Field
+
 
 class InputData(BaseModel):
     sex: Literal["male", "female"] = Field(
@@ -25,6 +27,7 @@ class InputData(BaseModel):
     duration: int = Field(
         ge=0, description="Duration for the time projection (>= 0)"
     )
+
 
 class OutputData(InputData):
     rmr: Dict[str, list] = Field(

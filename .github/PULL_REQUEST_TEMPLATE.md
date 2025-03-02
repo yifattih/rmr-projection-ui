@@ -1,16 +1,11 @@
-# Story Title
-
-[This is the Issue Title](https://github.com/username/repository-name/issues/1)
+## Description
+Provide a brief summary of the changes in this pull request. Explain the problem that this PR addresses and any relevant background information.
 
 ## Changes made
-
-- made this
-- did that
-
-## How does the solution address the problem
-
-This PR will...
+List the specific changes made in this pull request. For example:
+- Fixed a bug that caused incorrect data projection
+- Refactored the data processing module for better performance
 
 ## Linked issues
-
-Resolves #1
+Link any related issues or tickets that this pull request resolves. For example:
+Resolves #123
