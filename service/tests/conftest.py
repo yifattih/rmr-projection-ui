@@ -1,6 +1,5 @@
-from main import service
-
 import pytest
+from main import service
 
 collect_ignore = ["otel/"]
 
