@@ -17,7 +17,7 @@ try:
     metric_exporter = OTLPMetricExporter(
         endpoint=otlp_endpoint
     )  # For sending traces to an observability backend
-except ImportError:
+except AssertionError:
     metric_exporter = ConsoleMetricExporter()
 
 # -------------------------
