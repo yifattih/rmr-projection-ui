@@ -137,7 +137,8 @@ jobs:
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.version=3.12
             -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.test.exclusions=tests/**, .devcontainer/**
+            -Dsonar.tests=service/tests
+            -Dsonar.test.exclusions=.devcontainer/**
             -Dsonar.verbose=true
   
   filesystem-security:
