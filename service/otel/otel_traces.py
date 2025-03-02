@@ -17,7 +17,7 @@ try:
     trace_exporter = OTLPSpanExporter(
         endpoint=otlp_endpoint
     )  # For sending traces to an observability backend
-except ImportError:
+except AssertionError:
     trace_exporter = ConsoleSpanExporter()  # For local debugging
 
 # -------------------------
