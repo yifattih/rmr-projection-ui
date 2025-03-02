@@ -133,7 +133,7 @@ jobs:
         with:
           args: >
             -Dsonar.organization=yifattih
-            -Dsonar.projectKey=my-ifattih_bmr_calculator
+            -Dsonar.projectKey=yifattih_rmr-projection-ui
             -Dsonar.host.url=https://sonarcloud.io
             -Dsonar.python.version=3.12
             -Dsonar.python.coverage.reportPaths=coverage.xml
