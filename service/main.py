@@ -10,7 +10,7 @@ from pydantic import ValidationError
 
 service_start_time_utc = datetime.now(timezone.utc)
 
-service = Flask(__name__)
+service = Flask(__name__, static_folder="static")
 
 setup_telemetry(service)
 
