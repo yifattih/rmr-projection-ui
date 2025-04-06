@@ -17,7 +17,7 @@ setup_telemetry(service)
 api_url = os.getenv("API_URL", "http://api:8000")
 logger.info(f"API URL: {api_url}")
 
-rmr_endpoint = f"{api_url}/rmr/"
+rmr_endpoint = f"{api_url}"
 logger.info(f"RMR endpoint: {rmr_endpoint}")
 
 
@@ -38,7 +38,7 @@ def root() -> str:
         return render_template("index.html")
 
 
-@service.post("/submit/")
+@service.post("/submit")
 def submit():
     """
     Endpoint to process submitted form data, call API for RMR calculations,
