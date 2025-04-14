@@ -1,16 +1,9 @@
-# devcontainer/Dockerfile
+FROM mcr.microsoft.com/devcontainers/base:bullseye
 
-FROM mcr.microsoft.com/devcontainers/python:1-3.12-bullseye
+ARG USERNAME=vscode
 
-# Install development dependencies
-# RUN apt-get update && apt-get upgrade -y && apt-get install -y
-
-# # Set the working directory
-WORKDIR /workspaces
-
-# Update pip
-RUN pip install --upgrade pip
-
-# Install additional Python dependencies if needed
-COPY requirements.txt .
-RUN pip install -r requirements.txt
+# install jless (because its not available at https://containers.dev/features at time of writing)
+RUN NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" \
+        && (echo; echo 'eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"') >> /home/vscode/.profile \
+        && eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)" \
+        && brew install jless

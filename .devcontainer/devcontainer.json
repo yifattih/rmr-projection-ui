@@ -1,36 +1,108 @@
 // For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/python
+// README at: https://github.com/devcontainers/templates/tree/main/src/debian
 {
-	"name": "RMR Projection UI devcontainer",
-	// Or use a Dockerfile or Docker Compose file. Info: https://containers.dev/guide/dockerfile
-	// "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bullseye",
-	"dockerComposeFile": "docker-compose-development.yml",
-	"service": "devcontainer",
+	"name": "RMR Projection User Interface Server",
+
+	// Use a base image from github.com/devcontainers/images. More info: https://aka.ms/vscode-remote/devcontainer.json.
+    // Use a prebuilt image from mcr.microsoft.com/devcontainers/base. More info: https://aka.ms/vscode-remote/devcontainer.json.
+    // Use a prebuilt image from docker.io. More info: https://aka.ms/vscode-remote/devcontainer.json.
+    // image: "mcr.microsoft.com/devcontainers/base:bullseye",
+
+    // Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
+	"build": {
+        "dockerfile": "Dockerfile"
+    },
+
+    // Inject additional Docker CLI arguments when creating the container. More info: https://aka.ms/vscode-remote/devcontainer.json#runargs
+    "runArgs": [
+        "--name",
+        "rmr-projection-ui"
+    ],
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"features": {
+		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {
+			"moby": false,
+			"installDockerBuildx": true,
+			"installDockerComposeSwitch": true,
+			"version": "20.10",
+			"dockerDashComposeVersion": "v2"
+		},
+		
+        "ghcr.io/mikaello/devcontainer-features/modern-shell-utils:2": {},
+        
+        // Other features per use case can be added here. For example:
+        // "ghcr.io/devcontainers-extra/features/pre-commit:2": {
+		// 	"version": "latest"
+		// }
+		
+        // "ghcr.io/devcontainers/features/go:1": {
+		// 	"version": "1.23"
+		// }
+
+        "ghcr.io/devcontainers/features/python:1": {
+			"installTools": true,
+			"version": "3.13"
+		}
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	// "forwardPorts": [],
 
-	// Use 'postCreateCommand' to run commands after the container is created.
-	// "postCreateCommand": "pip install -r requirements.txt",
+	// Configure tool-specific properties.
 	"customizations": {
 		"vscode": {
 			"extensions": [
-				"ecmel.vscode-html-css"
-			]
+				"mhutchie.git-graph",
+				"eamodio.gitlens",
+				"ms-azuretools.vscode-docker",
+				"github.vscode-github-actions",
+				"johnpapa.vscode-peacock",
+				"timonwong.shellcheck",
+                // Other project-specific extensions can be added here
+                "ecmel.vscode-html-css"
+			],
+            "settings": {
+                "github.copilot.chat.codeGeneration.instructions": [
+                    {
+                        "text": "This dev container includes the Docker CLI (`docker`) pre-installed and available on the `PATH` for running and managing containers using the Docker daemon on the host machine."
+                    },
+                    {
+                        "text": "This dev container includes `python3` and `pip3` pre-installed and available on the `PATH`, along with the Python language extensions for Python development."
+                    }
+                ],
+                "python.defaultInterpreterPath": "/usr/local/python/current/bin/python",
+                "[python]": {
+                    "editor.defaultFormatter": "ms-python.autopep8"
+                },
+                "editor.tabSize": 4,
+                "terminal.integrated.defaultProfile.linux": "zsh",
+                "terminal.integrated.profiles.linux": {
+                    "bash": {
+                        "path": "bash",
+                        "icon": "terminal-bash"
+                    },
+                    "zsh": {
+                        "path": "zsh"
+                    },
+                    "fish": {
+                        "path": "fish"
+                    },
+                    "tmux": {
+                        "path": "tmux",
+                        "icon": "terminal-tmux"
+                    },
+                    "pwsh": {
+                        "path": "pwsh",
+                        "icon": "terminal-powershell"
+                    }
+                }
+            }
 		}
 	},
-	"features": {
-		"ghcr.io/devcontainers/features/docker-outside-of-docker:1": {},
-		"ghcr.io/dhoeric/features/act:1": {}
-    },
 
-    "postStartCommand": "sudo chown -R vscode:vscode /workspaces/*"
-
-	// Configure tool-specific properties.
-	// "customizations": {},
+    // Use 'postCreateCommand' to run commands after the container is created.
+    "postCreateCommand": "pip install -r requirements.dev.txt && pip install -r requirements.txt"
 
 	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
 	// "remoteUser": "root"
