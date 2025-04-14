@@ -21,7 +21,7 @@ def test_submit_valid_data(client, valid_data):
         mock_response.json.return_value = {"rmr": 1700}
         mock_post.return_value = mock_response
 
-        response = client.post("/submit/", data=valid_data)
+        response = client.post("/submit", data=valid_data)
         assert response.status_code == 200
         assert response.json == {"rmr": 1700}
 
@@ -30,7 +30,7 @@ def test_submit_invalid_data(client, invalid_data):
     """
     Test submitting invalid data returns a 400 status code and error message
     """
-    response = client.post("/submit/", data=invalid_data)
+    response = client.post("/submit", data=invalid_data)
     assert response.status_code == 400
     assert "Invalid input data" in response.json["message"]
 
@@ -41,7 +41,7 @@ def test_submit_api_failure(client, valid_data):
     error message
     """
     with patch("requests.post", side_effect=ConnectionError):
-        response = client.post("/submit/", data=valid_data)
+        response = client.post("/submit", data=valid_data)
         assert response.status_code == 503
         assert "Failed to contact API" in response.json["error"]
 
