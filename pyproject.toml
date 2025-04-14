@@ -19,13 +19,13 @@ exit-zero = true
 [tool.pytest.ini_options]
 addopts = [
     "--pspec",
-    "--cov=service",
+    "--cov=src",
     "--cov-report=term-missing"
 ]
 
 [tool.coverage.run]
 omit = [
-    "otel/*"
+    "otel/*"  # Exclude everything inside otel/
 ]
 
 [tool.coverage.report]
@@ -34,9 +34,9 @@ exclude_lines = [
 ]
 
 [tool.poetry]
-name = "service"
-version = "0.1.0"
-description = "A RESTful API for calculating Resting Metabolic Rate using Mifflin-St. Jeor equations"
+name = "RMR-Projection-UI-SERVER"
+version = "1.0.0"
+description = "A Flask server to serve static files for the RMR Projection UI"
 authors = ["Yifattih <yifattih@proton.me>"]
 
 [tool.poetry.dependencies]
@@ -52,11 +52,3 @@ opentelemetry-exporter-otlp = "^1.30.0"
 opentelemetry-instrumentation = "^0.51b0"
 opentelemetry-instrumentation-flask = "^0.51b0"
 opentelemetry-instrumentation-logging = "^0.51b0"
-
-[tool.sonar]
-projectKey = "ifattih_bmr_calculator"
-organization = "yifattih"
-host.url = "https://sonarcloud.io"
-python.version = "3.12"
-python.coverage.reportPaths = "coverage.xml"
-exclusions = ["tests/**", ".devcontainer/**"]
