@@ -2,173 +2,209 @@
 name: CI Pipeline
 
 on:
-  push:
-    branches:
-      - '**'
-      - '!main'
-      - '!alpha'
-      - '!dev'
+    # From: https://stackoverflow.com/a/74182598
+    workflow_call:
+        inputs:
+            external_call:
+                description: Indicates if the workflow is called externally.
+                required: true
+                type: boolean
+            env_vars:
+                description: List of environment variables to set up, given in name=value format.
+                required: true
+                type: string
+        secrets:
+            CODECOV_TOKEN:
+                required: true
+            SONAR_HOST_URL:
+                required: true
+            SONAR_TOKEN:
+                required: true
+            SNYK_TOKEN:
+                required: true
+    push:
+        branches:
+        - '**'
+        - '!main'
+        - '!alpha'
+        - '!dev'
 
 jobs:
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+    # From: https://stackoverflow.com/a/74182598
+    set-env-vars:
+        name: Set Environment Variables
+        runs-on: ubuntu-latest
+        if: ${{ inputs.external_call }}
+        steps:
+          - name: Iterate over input and store environment variables
+            if: ${{ inputs.env_vars }}
+            run: |
+              for i in "${{ inputs.env_vars }}"
+              do
+                printf "%s\n" $i >> $GITHUB_ENV
+              done
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+    lint:
+        name: Lint
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r service/requirements.txt
-          pip install -r .devcontainer/requirements.txt
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.13'
 
-      - name: Lint code with Flake8 and generate report
-        run: |
-          mkdir -p reports
-          flake8 --tee --output-file=reports/flake8-report.txt service
-      
-      - name: Upload flake8 report as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: flake8-report
-          path: reports/flake8-report.txt
-          if-no-files-found: warn
-          retention-days: 30
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install -r requirements.dev.txt
+
+            - name: Lint code with Flake8 and generate report
+              run: |
+                mkdir -p reports
+                flake8 --tee --output-file=reports/flake8-report.txt src
+            
+            - name: Upload flake8 report as an artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: flake8-report
+                path: reports/flake8-report.txt
+                if-no-files-found: warn
+                retention-days: 30
   
-  format:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+    format:
+        name: Format
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r service/requirements.txt
-          pip install -r .devcontainer/requirements.txt
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install -r requirements.dev.txt
 
-      - name: Check code formatting with Black and generate report
-        run: |
-          mkdir reports
-          black --check --diff service | tee reports/black-report.txt
-  
-      - name: Upload black report as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: black-report
-          path: reports/black-report.txt
-          if-no-files-found: warn
-          retention-days: 30
+            - name: Check code formatting with Black and generate report
+              run: |
+                mkdir reports
+                black --check --diff src | tee reports/black-report.txt
+        
+            - name: Upload black report as an artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: black-report
+                path: reports/black-report.txt
+                if-no-files-found: warn
+                retention-days: 30
 
-      - name: Check code formatting with isort and generate report
-        run: |
-          isort --check-only --diff service | tee reports/isort-report.txt
-      
-      - name: Upload isort report as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: iso-report
-          path: reports/isort-report.txt
-          if-no-files-found: warn
-          retention-days: 30
+            - name: Check code formatting with isort and generate report
+              run: |
+                isort --check-only --diff src | tee reports/isort-report.txt
+            
+            - name: Upload isort report as an artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: iso-report
+                path: reports/isort-report.txt
+                if-no-files-found: warn
+                retention-days: 30
 
-  test:
-    name: Test
-    runs-on: ubuntu-latest
-    needs: [lint, format]
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+    test:
+        name: Test
+        runs-on: ubuntu-latest
+        needs: [lint, format]
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r service/requirements.txt
-          pip install -r .devcontainer/requirements.txt
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
+                pip install -r requirements.dev.txt
 
-      - name: Run tests with Pytest and generate coverage report
-        run: |
-          mkdir -p reports
-          pytest --cov=service --cov-report=xml --cov-report=term | tee reports/pytest_report.txt
+            - name: Run tests with Pytest and generate coverage report
+              run: |
+                mkdir -p reports
+                pytest --cov=src --cov-report=xml --cov-report=term | tee reports/pytest_report.txt
 
-      - name: Upload pytest report as an artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: pytest-report
-          path: reports/pytest_report.txt
-          if-no-files-found: warn
-          retention-days: 30
+            - name: Upload pytest report as an artifact
+              uses: actions/upload-artifact@v4
+              with:
+                name: pytest-report
+                path: reports/pytest_report.txt
+                if-no-files-found: warn
+                retention-days: 30
 
-      - name: Upload coverage results and generate report in Codecov
-        uses: codecov/codecov-action@v4
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-          name: codecov-umbrella
-          files: coverage.xml
-          flags: unittests
-          verbose: true
-          fail_ci_if_error: true
+            - name: Upload coverage results and generate report in Codecov
+              uses: codecov/codecov-action@v4
+              with:
+                token: ${{ secrets.CODECOV_TOKEN }}
+                handle_no_reports_found: warn
+                slug: ${{ github.repository }}
+                files: coverage.xml
+                verbose: true
 
-      - name: Run quality and security scan and generate report in SonarCloud
-        uses: SonarSource/sonarqube-scan-action@v5.0.0
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          args: >
-            -Dsonar.organization=yifattih
-            -Dsonar.projectKey=yifattih_rmr-projection-ui
-            -Dsonar.host.url=https://sonarcloud.io
-            -Dsonar.python.version=3.12
-            -Dsonar.python.coverage.reportPaths=coverage.xml
-            -Dsonar.tests=service/tests
-            -Dsonar.test.exclusions=.devcontainer/**
-            -Dsonar.verbose=true
-  
-  filesystem-security:
-    name: Filesystem Security Scan
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+            - name: SonarQube quality and security scan and report
+              uses: SonarSource/sonarqube-scan-action@v5.1.0
+              env:
+                SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+              with:
+                projectBaseDir: src
+                args: >
+                    -Dsonar.organization=${{ vars.SONAR_ORGANIZATION }}
+                    -Dsonar.projectKey=${{ vars.SONAR_PROJECT_KEY }}
+                    -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }}
+                    -Dsonar.qualitygate.wait=false
+                    -Dsonar.python.version=3.13
+                    -Dsonar.python.coverage.reportPaths=coverage.xml
+                    -Dsonar.tests=tests/
+                    -Dsonar.test.exclusions=tests/**,.devcontainer/**
+                    -Dsonar.verbose=true
+                    -Dsonar.scanner.skipSystemTruststore=true
+    
+    filesystem-security:
+        name: Filesystem Security Scan
+        runs-on: ubuntu-latest
+        steps:
+            - name: Check out repository
+              uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.12'
+            - name: Set up Python
+              uses: actions/setup-python@v5
+              with:
+                python-version: '3.13'
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r service/requirements.txt
+            - name: Install dependencies
+              run: |
+                python -m pip install --upgrade pip
+                pip install -r requirements.txt
 
-      - name: Run Snyk to check for dependencies vulnerabilities
-        uses: snyk/actions/python@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: >
-            --file=service/requirements.txt
-            --severity-threshold=low
-            --sarif-file-output=snyk.sarif
+            - name: Run Snyk to check for dependencies vulnerabilities
+              uses: snyk/actions/python@master
+              env:
+                SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+              with:
+                args: >
+                    --file=requirements.txt
+                    --severity-threshold=low
+                    --sarif-file-output=snyk.sarif
 
-      - name: Upload result to GitHub Code Scanning
-        uses: github/codeql-action/upload-sarif@v3
-        with:
-          sarif_file: snyk.sarif
+            - name: Upload result to GitHub Code Scanning
+              uses: github/codeql-action/upload-sarif@v3
+              with:
+                sarif_file: snyk.sarif
